@@ -2582,10 +2582,20 @@ textarea.value = '';
 const liEl = document.getElementById('lyricistInput'); if (liEl) liEl.value = '';
 const coEl = document.getElementById('composerInput'); if (coEl) coEl.value = '';
 render();
-// モバイル初期化
-if (window.innerWidth <= 900) {
-  switchMobTab('edit');
+// モバイル初期化（確実に実行）
+function initMobile() {
+  if (window.innerWidth <= 900) {
+    switchMobTab('edit');
+  }
 }
+// DOM読み込み完了後に実行
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobile);
+} else {
+  initMobile();
+}
+// さらにwindow.loadでも念押し
+window.addEventListener('load', initMobile);
 
 // =====================================================================
 // SHARED CAPTURE  (used by both PDF and Print)
