@@ -1,0 +1,41 @@
+{
+  "app": "コード譜職人",
+  "version": 1,
+  "exportedAt": "2026-03-17T10:42:30.036Z",
+  "songs": [
+    {
+      "id": "mmm7racc8pec",
+      "title": "無題",
+      "lyrics": "",
+      "lyricist": "",
+      "composer": "",
+      "instrument": "ukulele",
+      "transpose": 0,
+      "createdAt": 1773244107804,
+      "updatedAt": 1773244107804
+    },
+    {
+      "id": "mmm351kmp09s",
+      "title": "無題",
+      "lyrics": "[A][A][A][A][A][A][A][A]\n[A]このよの[E]だれより[F#m]優れた[E]人ならば\n[D]争い[A]ごとも[D]避けるで[E]しょう\n\n[A]振り上げた[E]拳の[F#m]中身は[E]でたらめで\n[D]世界の[A]約束も[D]虚しいけ[E]ど　　　　　　　　\n\n[D]空をつなぎ[D]星を数え[D]風を紡ぎ[D]大地で歌[A]え\n[D]闇の中で[D]手を伸ばして[D]真実だけを[D]つかみ取[A]れ\n[E]no[F#m] tears[E]no[D]cry \n[E]風を待ってる\n\n[A][A][A][A][A][A][A][A]\n\n[A]この世の[E]誰より[F#m]お金を[E]持ってたら\n[D]あの娘の[A]心も[D]買えますか[E]\n[A]ママレード[E]色した[F#m]空を[E]思うから\n[D]希望の[A]明日を[D]願うから[E]　\n　\n[D]愛に震え[D]恋に怯え[D]夢に破れ[D]土砂降りで踊れ[A]\n[D]ベルベットの[D]夜の中に[D]迷い込んだ[D]コヨーテみたいに\n[E]no[F#m] tears[E]no[D]cry \n[E]また、歩きだす\n\n［G］［F］［G］［E］［E］\n\n[D]空をつなぎ[D]星を数え[D]風を紡ぎ[D]大地で歌[A]え\n[D]闇の中で[D]手を伸ばして[D]真実だけを[D]つかみ取[A]れ\n[E]no[F#m] tears[E]no[D]cry \n[E]風を待ってる\n[A][A][A][A][A][A][A][A]",
+      "lyricist": "",
+      "composer": "",
+      "instrument": "ukulele",
+      "transpose": 0,
+      "createdAt": 1773236351542,
+      "updatedAt": 1773236351542
+    },
+    {
+      "id": "mmm0pp2a9hjc",
+      "title": "風を待ってる",
+      "lyrics": "[A][A][A][A][A][A][A][A]\n[A]このよの[E]だれより[F#m]優れた[E]人ならば\n[D]争い[A]ごとも[D]避けるで[E]しょう\n\n[A]振り上げた[E]拳の[F#m]中身は[E]でたらめで\n[D]世界の[A]約束も[D]虚しいけ[E]ど　　　　　　　　\n\n[D]空をつなぎ[D]星を数え[D]風を紡ぎ[D]大地で歌[A]え\n[D]闇の中で[D]手を伸ばして[D]真実だけを[D]つかみ取[A]れ\n[E]no[F#m] tears[E]no[D]cry \n[E]風を待ってる\n\n[A][A][A][A][A][A][A][A]\n\n[A]この世の[E]誰より[F#m]お金を[E]持ってたら\n[D]あの娘の[A]心も[D]買えますか[E]\n[A]ママレード[E]色した[F#m]空を[E]思うから\n[D]希望の[A]明日を[D]願うから[E]　\n　\n[D]愛に震え[D]恋に怯え[D]夢に破れ[D]土砂降りで踊れ[A]\n[D]ベルベットの[D]夜の中に[D]迷い込んだ[D]コヨーテみたいに\n[E]no[F#m] tears[E]no[D]cry \n[E]また、歩きだす\n\n［G］［F］［G］［E］［E］\n\n[D]空をつなぎ[D]星を数え[D]風を紡ぎ[D]大地で歌[A]え\n[D]闇の中で[D]手を伸ばして[D]真実だけを[D]つかみ取[A]れ\n[E]no[F#m] tears[E]no[D]cry \n[E]風を待ってる\n[A][A][A][A][A][A][A][A]",
+      "lyricist": "ジョニー",
+      "composer": "ジョニー",
+      "instrument": "guitar",
+      "transpose": 0,
+      "createdAt": 1773232276258,
+      "updatedAt": 1773741695328,
+      "youtube": "https://youtu.be/6Ke-NzhYpVI?si=-K45nD_7UDmXFOpT"
+    }
+  ]
+}
