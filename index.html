@@ -914,7 +914,7 @@ textarea::placeholder { color: var(--text-dim); }
   </div>
 
   <!-- Editor -->
-  <div class="editor-panel">
+  <div class="editor-panel mob-active">
     <div class="mob-song-select-wrap">
       <select class="mob-song-select" id="mobSongSelect"><option value="">— 曲を選択 —</option></select>
       <button class="lib-new-btn" id="libNewBtnMob">＋ 新規</button>
@@ -2564,7 +2564,7 @@ if (mdb) mdb.addEventListener('click', () => {
 
 // ── Mobile tab switching ──
 function switchMobTab(tab) {
-  if (window.innerWidth > 900) return;
+  if (window.innerWidth > 900 && !document.querySelector('.mob-top-tabs')) return;
   document.querySelectorAll('.editor-panel,.view-panel').forEach(p => p.classList.remove('mob-active'));
   document.querySelectorAll('.mob-top-tab').forEach(t => t.classList.remove('active'));
   const panel = document.querySelector(tab === 'edit' ? '.editor-panel' : '.view-panel');
@@ -2582,20 +2582,12 @@ textarea.value = '';
 const liEl = document.getElementById('lyricistInput'); if (liEl) liEl.value = '';
 const coEl = document.getElementById('composerInput'); if (coEl) coEl.value = '';
 render();
-// モバイル初期化（確実に実行）
-function initMobile() {
+// モバイル初期化
+window.addEventListener('load', function() {
   if (window.innerWidth <= 900) {
     switchMobTab('edit');
   }
-}
-// DOM読み込み完了後に実行
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMobile);
-} else {
-  initMobile();
-}
-// さらにwindow.loadでも念押し
-window.addEventListener('load', initMobile);
+});
 
 // =====================================================================
 // SHARED CAPTURE  (used by both PDF and Print)
