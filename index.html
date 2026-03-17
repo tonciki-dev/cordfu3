@@ -781,7 +781,7 @@ textarea::placeholder { color: var(--text-dim); }
   flex-shrink: 0;
 }
 .mob-del-btn:hover { border-color: var(--unknown); color: var(--unknown); background: rgba(200,50,50,0.1); }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   body { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
   header { padding: 6px 12px; flex-shrink: 0; flex-wrap: nowrap; }
   .logo { font-size: 0.9rem; }
@@ -2564,7 +2564,7 @@ if (mdb) mdb.addEventListener('click', () => {
 
 // ── Mobile tab switching ──
 function switchMobTab(tab) {
-  if (window.innerWidth > 700) return;
+  if (window.innerWidth > 900) return;
   document.querySelectorAll('.editor-panel,.view-panel').forEach(p => p.classList.remove('mob-active'));
   document.querySelectorAll('.mob-top-tab').forEach(t => t.classList.remove('active'));
   const panel = document.querySelector(tab === 'edit' ? '.editor-panel' : '.view-panel');
@@ -2583,7 +2583,7 @@ const liEl = document.getElementById('lyricistInput'); if (liEl) liEl.value = ''
 const coEl = document.getElementById('composerInput'); if (coEl) coEl.value = '';
 render();
 // モバイル初期化
-if (window.innerWidth <= 700) {
+if (window.innerWidth <= 900) {
   switchMobTab('edit');
 }
 
