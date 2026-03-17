@@ -786,19 +786,33 @@ textarea::placeholder { color: var(--text-dim); }
   header { padding: 6px 12px; flex-shrink: 0; flex-wrap: nowrap; }
   .logo { font-size: 0.9rem; }
   .hint { display: none; }
-  .theme-select {
-  background: var(--panel2);
-  color: var(--text-dim);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 0.72rem;
-  font-family: 'Noto Sans JP', sans-serif;
-  cursor: pointer;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-  margin-left: auto;
+  .theme-btn { padding: 3px 10px; font-size: 0.68rem; }
+  .inst-bar { padding: 3px 8px; flex-wrap: nowrap; flex-shrink: 0; }
+  .inst-label { display: none; }
+  .inst-btn { flex: 1; min-width: 0; justify-content: center; padding: 3px 2px; font-size: 0.68rem; white-space: nowrap; border-radius: 4px; }
+  .mob-top-tabs { display: flex; flex-shrink: 0; background: var(--panel2); border-bottom: 1px solid var(--border); }
+  .mob-top-tab { flex: 1; background: none; border: none; border-bottom: 3px solid transparent; color: var(--text-dim); font-family: "Noto Sans JP", sans-serif; font-size: 0.8rem; padding: 7px 4px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  #mobTabEdit.active { color: #fff; background: rgba(210,100,20,0.85); border-bottom-color: #e06010; }
+  #mobTabPreview.active { color: #fff; background: rgba(30,100,200,0.85); border-bottom-color: #2060e0; }
+  #mobTabEdit:not(.active) { color: #c07040; }
+  #mobTabPreview:not(.active) { color: #6090c0; }
+  .workspace { flex: 1; min-height: 0; grid-template-columns: 1fr; grid-template-rows: 1fr; overflow: hidden; display: grid; }
+  .library-panel { display: none !important; }
+  .editor-panel { display: none !important; border-right: none; flex-direction: column; overflow: hidden; }
+  .view-panel { display: none !important; flex-direction: column; overflow: hidden; }
+  .editor-panel.mob-active { display: flex !important; flex-direction: column; }
+  .view-panel.mob-active { display: flex !important; flex-direction: column; }
+  .mob-song-select-wrap { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
+  .mob-tool-bar { display: flex !important; flex-direction: column; gap: 0; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
+  .mob-tool-row { display: flex; align-items: center; gap: 5px; padding: 4px 8px; flex-wrap: nowrap; }
+  .editor-panel .panel-bar { display: none !important; }
+  .view-panel .panel-bar { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 5px !important; padding: 5px 8px !important; flex-shrink: 0 !important; }
+  .editor-panel .title-row { flex-shrink: 0; flex-wrap: wrap; gap: 4px !important; padding: 4px 10px; }
+  .title-input { font-size: 0.95rem !important; }
+  textarea { flex: 1; min-height: 0; font-size: 1rem; line-height: 1.9; padding: 10px 12px; -webkit-text-size-adjust: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .view-scroll { flex: 1; min-height: 0; padding: 14px 12px 24px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .lib-item { padding: 11px 10px; }
+  .lib-item-name { font-size: 0.9rem; }
 }
 .theme-btn { padding: 3px 10px; font-size: 0.68rem; }
   .inst-bar { padding: 3px 8px; flex-wrap: nowrap; flex-shrink: 0; }
