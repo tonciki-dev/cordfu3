@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>コード譜職人</title>
 <!-- PWA -->
@@ -183,48 +184,6 @@ header {
   background: var(--panel2);
   overflow: hidden;
 }
-.lib-tabs {
-  display: flex;
-  width: 100%;
-}
-.lib-tab {
-  flex: 1;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--text-dim);
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 0.78rem;
-  padding: 8px 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.lib-tab.active {
-  color: var(--accent-light);
-  border-bottom-color: var(--accent);
-  background: rgba(212,160,68,0.07);
-  font-weight: 700;
-}
-.lib-official-item {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background 0.12s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.lib-official-item:hover { background: var(--panel2); }
-.lib-official-badge {
-  font-size: 0.58rem;
-  background: var(--accent-dim);
-  color: var(--accent-light);
-  border: 1px solid var(--accent);
-  border-radius: 3px;
-  padding: 1px 4px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
 .lib-bar {
   padding: 7px 10px;
   font-size: 0.67rem;
@@ -233,17 +192,6 @@ header {
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
 }
-.lib-export-btn {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text-dim);
-  border-radius: 4px;
-  padding: 2px 7px;
-  font-size: 0.78rem;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.lib-export-btn:hover { border-color: var(--accent); color: var(--accent-light); }
 .lib-new-btn {
   background: none;
   border: 1px solid var(--border);
@@ -300,41 +248,6 @@ header {
   color: var(--text-dim);
   margin-top: 1px;
 }
-.lib-check {
-  width: 16px; height: 16px;
-  cursor: pointer;
-  accent-color: var(--accent);
-  flex-shrink: 0;
-}
-.lib-item-check-area {
-  display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0;
-}
-.lib-select-bar {
-  display: none;
-  padding: 5px 10px;
-  background: var(--panel2);
-  border-bottom: 1px solid var(--border);
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  color: var(--text-dim);
-}
-.lib-select-bar.visible { display: flex; }
-.lib-select-export-btn {
-  background: var(--accent-dim);
-  border: 1px solid var(--accent);
-  color: var(--accent-light);
-  border-radius: 4px;
-  padding: 3px 10px;
-  font-size: 0.7rem;
-  font-family: 'Noto Sans JP', sans-serif;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-weight: 700;
-  margin-left: auto;
-}
-.lib-select-export-btn:hover { background: var(--accent); color: #fff; }
 .lib-empty {
   padding: 20px 12px;
   font-size: 0.72rem;
@@ -786,33 +699,19 @@ textarea::placeholder { color: var(--text-dim); }
   header { padding: 6px 12px; flex-shrink: 0; flex-wrap: nowrap; }
   .logo { font-size: 0.9rem; }
   .hint { display: none; }
-  .theme-btn { padding: 3px 10px; font-size: 0.68rem; }
-  .inst-bar { padding: 3px 8px; flex-wrap: nowrap; flex-shrink: 0; }
-  .inst-label { display: none; }
-  .inst-btn { flex: 1; min-width: 0; justify-content: center; padding: 3px 2px; font-size: 0.68rem; white-space: nowrap; border-radius: 4px; }
-  .mob-top-tabs { display: flex; flex-shrink: 0; background: var(--panel2); border-bottom: 1px solid var(--border); }
-  .mob-top-tab { flex: 1; background: none; border: none; border-bottom: 3px solid transparent; color: var(--text-dim); font-family: "Noto Sans JP", sans-serif; font-size: 0.8rem; padding: 7px 4px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; }
-  #mobTabEdit.active { color: #fff; background: rgba(210,100,20,0.85); border-bottom-color: #e06010; }
-  #mobTabPreview.active { color: #fff; background: rgba(30,100,200,0.85); border-bottom-color: #2060e0; }
-  #mobTabEdit:not(.active) { color: #c07040; }
-  #mobTabPreview:not(.active) { color: #6090c0; }
-  .workspace { flex: 1; min-height: 0; grid-template-columns: 1fr; grid-template-rows: 1fr; overflow: hidden; display: grid; }
-  .library-panel { display: none !important; }
-  .editor-panel { display: none !important; border-right: none; flex-direction: column; overflow: hidden; }
-  .view-panel { display: none !important; flex-direction: column; overflow: hidden; }
-  .editor-panel.mob-active { display: flex !important; flex-direction: column; }
-  .view-panel.mob-active { display: flex !important; flex-direction: column; }
-  .mob-song-select-wrap { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
-  .mob-tool-bar { display: flex !important; flex-direction: column; gap: 0; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
-  .mob-tool-row { display: flex; align-items: center; gap: 5px; padding: 4px 8px; flex-wrap: nowrap; }
-  .editor-panel .panel-bar { display: none !important; }
-  .view-panel .panel-bar { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 5px !important; padding: 5px 8px !important; flex-shrink: 0 !important; }
-  .editor-panel .title-row { flex-shrink: 0; flex-wrap: wrap; gap: 4px !important; padding: 4px 10px; }
-  .title-input { font-size: 0.95rem !important; }
-  textarea { flex: 1; min-height: 0; font-size: 1rem; line-height: 1.9; padding: 10px 12px; -webkit-text-size-adjust: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  .view-scroll { flex: 1; min-height: 0; padding: 14px 12px 24px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  .lib-item { padding: 11px 10px; }
-  .lib-item-name { font-size: 0.9rem; }
+  .theme-select {
+  background: var(--panel2);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin-left: auto;
 }
 .theme-btn { padding: 3px 10px; font-size: 0.68rem; }
   .inst-bar { padding: 3px 8px; flex-wrap: nowrap; flex-shrink: 0; }
@@ -830,8 +729,7 @@ textarea::placeholder { color: var(--text-dim); }
   .mob-song-select-wrap { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
   .mob-tool-bar { display: flex !important; flex-direction: column; gap: 0; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
   .mob-tool-row { display: flex; align-items: center; gap: 5px; padding: 4px 8px; flex-wrap: nowrap; }
-  .editor-panel .panel-bar { display: none !important; }
-  .view-panel .panel-bar { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 5px !important; padding: 5px 8px !important; flex-shrink: 0 !important; }
+  .panel-bar { display: none !important; }
   .editor-panel .title-row { flex-shrink: 0; flex-wrap: wrap; gap: 4px !important; padding: 4px 10px; }
   .title-input { font-size: 0.95rem !important; }
   textarea { flex: 1; min-height: 0; font-size: 1rem; line-height: 1.9; padding: 10px 12px; -webkit-text-size-adjust: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -878,38 +776,11 @@ textarea::placeholder { color: var(--text-dim); }
   <!-- ── Song library ── -->
   <div class="library-panel">
     <div class="lib-bar">
-      <div class="lib-tabs">
-        <button class="lib-tab active" id="libTabMy">📚 マイ曲</button>
-        <button class="lib-tab" id="libTabOfficial">🎵 公式曲</button>
-      </div>
+      <span>📚 曲リスト</span>
+      <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
     </div>
-    <!-- マイ曲セクション -->
-    <div id="libMySection">
-      <div class="lib-bar" style="border-top:none;padding-top:4px;">
-        <div style="display:flex;gap:4px;margin-left:auto;">
-          <button class="lib-export-btn" id="libExportBtn" title="JSONで書き出し">🔼 書出</button>
-          <button class="lib-export-btn" id="libImportBtn" title="JSONを取り込む">🔽 読込</button>
-          <input type="file" id="libImportFile" accept=".json" style="display:none;">
-          <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
-        </div>
-      </div>
-      <div class="lib-select-bar" id="libSelectBar">
-        <span id="libSelectCount">0曲選択中</span>
-        <button class="lib-select-export-btn" id="libSelectExportBtn">🔼 選択曲を書出</button>
-      </div>
-      <div class="lib-list" id="libList">
-        <div class="lib-empty" id="libEmpty">保存した曲が<br>ここに表示されます</div>
-      </div>
-    </div>
-    <!-- 公式曲セクション -->
-    <div id="libOfficialSection" style="display:none;flex-direction:column;flex:1;min-height:0;">
-      <div class="lib-bar" style="border-top:none;padding-top:4px;">
-        <span style="font-size:0.7rem;color:var(--text-dim);">管理者が公開した曲リスト</span>
-        <button class="lib-export-btn" id="libOfficialRefreshBtn" title="最新データを取得" style="margin-left:auto;">🔄</button>
-      </div>
-      <div class="lib-list" id="libOfficialList">
-        <div class="lib-empty" id="libOfficialEmpty">読み込み中...</div>
-      </div>
+    <div class="lib-list" id="libList">
+      <div class="lib-empty" id="libEmpty">保存した曲が<br>ここに表示されます</div>
     </div>
   </div>
 
@@ -1008,15 +879,13 @@ function rootIdx(r){ return ROOT_IDX[r] ?? -1; }
 function idxToRoot(i,flat){ i=((i%12)+12)%12; return (flat||FLAT_PREFERRED.has(i))?FLATS[i]:SHARPS[i]; }
 function parseChord(raw){
   const n=raw.replace(/♭/g,'b').replace(/♯/g,'#');
-  // onコード対応: C/E または ConE 両方対応
-  const slashMatch = n.match(/^([A-G][#b]?)([^/]*?)\/([A-G][#b]?)$/);
-  const onMatch    = n.match(/^([A-G][#b]?)([^/on]*)on([A-G][#b]?)$/);
-  const m2 = slashMatch || onMatch;
-  if(m2){
-    const idx=rootIdx(m2[1]);
+  // onコード対応: ConE → root=C, suffix='', bass='E'
+  const onMatch = n.match(/^([A-G][#b]?)([^/on]*)on([A-G][#b]?)$/);
+  if(onMatch){
+    const idx=rootIdx(onMatch[1]);
     if(idx<0)return null;
-    const bassIdx=rootIdx(m2[3]);
-    return{root:m2[1],suffix:m2[2],idx,bass:m2[3],bassIdx};
+    const bassIdx=rootIdx(onMatch[3]);
+    return{root:onMatch[1],suffix:onMatch[2],idx,bass:onMatch[3],bassIdx};
   }
   const m=n.match(/^([A-G][#b]?)(.*)/);
   if(!m)return null;
@@ -1035,7 +904,7 @@ function transposeChord(raw,st){
   if(p.bass){
     const bi=((p.bassIdx+st)%12+12)%12;
     const bflat=p.bass.includes('b');
-    return newRoot+'/'+idxToRoot(bi,bflat);
+    return newRoot+'on'+idxToRoot(bi,bflat);
   }
   return newRoot;
 }
@@ -2129,17 +1998,13 @@ function renderLibrary() {
     const dateStr = song.updatedAt ? new Date(song.updatedAt).toLocaleDateString('ja-JP',{month:'short',day:'numeric'}) : '';
 
     item.innerHTML = `
-      <input type="checkbox" class="lib-check" data-id="${song.id}">
-      <div class="lib-item-check-area">
-        <div style="flex:1;min-width:0;">
-          <div class="lib-item-name" title="${esc(song.title || '無題')}">${instIcon} ${esc(song.title || '無題')}</div>
-          <div class="lib-item-date">${dateStr}</div>
-        </div>
-        <button class="lib-item-del" data-id="${song.id}" title="削除">✕</button>
+      <div style="flex:1;min-width:0;">
+        <div class="lib-item-name" title="${esc(song.title || '無題')}">${instIcon} ${esc(song.title || '無題')}</div>
+        <div class="lib-item-date">${dateStr}</div>
       </div>
+      <button class="lib-item-del" data-id="${song.id}" title="削除">✕</button>
     `;
     item.querySelector('.lib-item-name').addEventListener('click', () => loadSong(song.id));
-    item.querySelector('.lib-check').addEventListener('change', updateSelectBar);
     item.querySelector('.lib-item-del').addEventListener('click', (e) => {
       e.stopPropagation();
       if (confirm(`「${song.title || '無題'}」を本当に削除してもよろしいですか？\nこの操作は元に戻せません。`)) deleteSong(song.id);
@@ -2253,184 +2118,32 @@ function doExport() {
   if (songs.length === 0) { alert('保存された曲がありません。'); return; }
   const data = { app: 'コード譜職人', version: 1, exportedAt: new Date().toISOString(), songs };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'コード譜職人_' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download='コード譜職人_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(url);
 }
 document.getElementById('libExportBtn').addEventListener('click', doExport);
-
-// JSON インポート
-function doImport(file) {
+document.getElementById('libImportBtn').addEventListener('click', () => document.getElementById('libImportFile').click());
+document.getElementById('libImportFile').addEventListener('change', function() {
+  if (!this.files[0]) return;
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
       const data = JSON.parse(e.target.result);
-      // コード譜職人のJSONか確認
       const imported = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : null);
       if (!imported) { alert('対応していない形式のファイルです。'); return; }
       const existing = loadSongs();
       const existingIds = new Set(existing.map(s => s.id));
-      // 重複IDは新しいIDを生成して追加
-      const toAdd = imported.map(s => {
-        if (existingIds.has(s.id)) {
-          return { ...s, id: genId(), createdAt: Date.now(), updatedAt: Date.now() };
-        }
-        return s;
-      });
-      const merged = [...toAdd, ...existing];
-      saveSongs(merged);
+      const toAdd = imported.map(s => existingIds.has(s.id) ? {...s, id:genId(), createdAt:Date.now(), updatedAt:Date.now()} : s);
+      saveSongs([...toAdd, ...existing]);
       renderLibrary();
-      alert(`${toAdd.length}曲を取り込みました！`);
-    } catch(err) {
-      alert('読み込みに失敗しました: ' + err.message);
-    }
+      alert(toAdd.length + '曲を取り込みました！');
+    } catch(err) { alert('読み込みに失敗しました: ' + err.message); }
   };
-  reader.readAsText(file, 'utf-8');
-}
-
-document.getElementById('libImportBtn').addEventListener('click', () => {
-  document.getElementById('libImportFile').click();
+  reader.readAsText(this.files[0], 'utf-8');
+  this.value = '';
 });
-document.getElementById('libImportFile').addEventListener('change', function() {
-  if (this.files[0]) { doImport(this.files[0]); this.value = ''; }
-});
-
-// 選択バー更新
-function updateSelectBar() {
-  const checked = document.querySelectorAll('.lib-check:checked');
-  const bar = document.getElementById('libSelectBar');
-  const count = document.getElementById('libSelectCount');
-  if (checked.length > 0) {
-    bar.classList.add('visible');
-    count.textContent = checked.length + '曲選択中';
-  } else {
-    bar.classList.remove('visible');
-  }
-}
-
-// 選択曲を書き出し
-document.getElementById('libSelectExportBtn').addEventListener('click', () => {
-  const checked = document.querySelectorAll('.lib-check:checked');
-  if (checked.length === 0) { alert('曲を選択してください。'); return; }
-  const ids = Array.from(checked).map(el => el.dataset.id);
-  const songs = loadSongs().filter(s => ids.includes(s.id));
-  const data = { app: 'コード譜職人', version: 1, exportedAt: new Date().toISOString(), songs };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'コード譜職人_選択曲_' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-  // チェックを外す
-  checked.forEach(el => { el.checked = false; });
-  updateSelectBar();
-});
-
-// ── ライブラリタブ切り替え ──
-let currentLibTab = 'my';
-function switchLibTab(tab) {
-  currentLibTab = tab;
-  document.getElementById('libTabMy').classList.toggle('active', tab === 'my');
-  document.getElementById('libTabOfficial').classList.toggle('active', tab === 'official');
-  document.getElementById('libMySection').style.display = tab === 'my' ? '' : 'none';
-  document.getElementById('libOfficialSection').style.display = tab === 'official' ? 'flex' : 'none';
-  if (tab === 'official') fetchOfficialSongs();
-}
-document.getElementById('libTabMy').addEventListener('click', () => switchLibTab('my'));
-document.getElementById('libTabOfficial').addEventListener('click', () => switchLibTab('official'));
-document.getElementById('libOfficialRefreshBtn').addEventListener('click', () => fetchOfficialSongs(true));
-
-// ── 公式曲リスト取得 ──
-const OFFICIAL_URL = 'https://tonciki-dev.github.io/chord-viewer/songs.json';
-const OFFICIAL_CACHE_KEY = 'officialSongsCache';
-
-async function fetchOfficialSongs(forceRefresh = false) {
-  const listEl  = document.getElementById('libOfficialList');
-  const emptyEl = document.getElementById('libOfficialEmpty');
-
-  // キャッシュを先に表示
-  if (!forceRefresh) {
-    const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
-    if (cached) {
-      renderOfficialList(JSON.parse(cached));
-      return;
-    }
-  }
-
-  emptyEl.textContent = '読み込み中...';
-  emptyEl.style.display = '';
-  listEl.querySelectorAll('.lib-official-item').forEach(el => el.remove());
-
-  try {
-    const res = await fetch(OFFICIAL_URL + '?t=' + Date.now());
-    if (!res.ok) throw new Error('取得失敗');
-    const data = await res.json();
-    const songs = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : []);
-    localStorage.setItem(OFFICIAL_CACHE_KEY, JSON.stringify(songs));
-    renderOfficialList(songs);
-  } catch(e) {
-    // キャッシュがあればそれを表示
-    const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
-    if (cached) {
-      renderOfficialList(JSON.parse(cached));
-    } else {
-      emptyEl.textContent = '公式曲リストがありません';
-    }
-  }
-}
-
-function renderOfficialList(songs) {
-  const listEl  = document.getElementById('libOfficialList');
-  const emptyEl = document.getElementById('libOfficialEmpty');
-  listEl.querySelectorAll('.lib-official-item').forEach(el => el.remove());
-
-  if (!songs || songs.length === 0) {
-    emptyEl.textContent = '公式曲がありません';
-    emptyEl.style.display = '';
-    return;
-  }
-  emptyEl.style.display = 'none';
-
-  songs.forEach(song => {
-    const item = document.createElement('div');
-    item.className = 'lib-official-item';
-    const inst = song.instrument || 'ukulele';
-    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[inst] || '🎵';
-    item.innerHTML = `
-      <div style="flex:1;min-width:0;">
-        <div class="lib-item-name" title="${esc(song.title||'無題')}">${instIcon} ${esc(song.title||'無題')}</div>
-        <div class="lib-item-date">${song.lyricist ? '作詞: '+esc(song.lyricist) : ''}</div>
-      </div>
-      <span class="lib-official-badge">公式</span>
-    `;
-    // クリックで読み込み（マイ曲タブに切り替えて表示）
-    item.addEventListener('click', () => {
-      loadSongData(song);
-      switchLibTab('my');
-    });
-    listEl.appendChild(item);
-  });
-}
-
-// 曲データを直接読み込む（IDなし）
-function loadSongData(song) {
-  document.getElementById('titleInput').value    = song.title    || '';
-  document.getElementById('lyricsInput').value   = song.lyrics   || '';
-  const lEl = document.getElementById('lyricistInput'); if(lEl) lEl.value = song.lyricist || '';
-  const cEl = document.getElementById('composerInput'); if(cEl) cEl.value = song.composer || '';
-  const yEl = document.getElementById('youtubeInput');  if(yEl) yEl.value = song.youtube  || '';
-  if (song.instrument) setInstrument(song.instrument);
-  transpose = song.transpose || 0;
-  document.getElementById('transpVal').textContent = transpose === 0 ? '±0' : (transpose > 0 ? '+' : '') + transpose;
-  currentSongId = null;
-  render();
-  renderLibrary();
-  if (window.innerWidth <= 700 && typeof switchMobTab === 'function') switchMobTab('preview');
-}
 
 document.getElementById('libSaveBtn').addEventListener('click', saveSong);
 document.getElementById('libNewBtn').addEventListener('click', newSong);
@@ -2447,68 +2160,23 @@ document.getElementById('libNewBtn').addEventListener('click', newSong);
 const lnb = document.getElementById('libNewBtnMob'); if (lnb) lnb.addEventListener('click', newSong);
 const mss = document.getElementById('mobSongSelect'); if (mss) mss.addEventListener('change', function() { if (this.value) loadSong(this.value); });
 
-// 公式曲モーダル（スマホ用）
-document.getElementById('mobOfficialBtn').addEventListener('click', () => {
-  document.getElementById('officialOverlay').classList.add('open');
-  renderOfficialModal();
-});
-document.getElementById('officialClose').addEventListener('click', () => {
-  document.getElementById('officialOverlay').classList.remove('open');
-});
-document.getElementById('officialOverlay').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
-});
-document.getElementById('officialRefreshBtn').addEventListener('click', () => {
-  fetchOfficialSongs(true).then(renderOfficialModal);
-});
-
-async function renderOfficialModal() {
-  const body = document.getElementById('officialBody');
-  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
-  await fetchOfficialSongs();
-  const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
-  const songs = cached ? JSON.parse(cached) : [];
-  body.innerHTML = '';
-  if (!songs || songs.length === 0) {
-    body.innerHTML = '<div class="lib-empty">公式曲がありません</div>';
-    return;
-  }
-  songs.forEach(song => {
-    const item = document.createElement('div');
-    item.className = 'lib-official-item';
-    const inst = song.instrument || 'ukulele';
-    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[inst] || '🎵';
-    item.innerHTML = `
-      <div style="flex:1;min-width:0;">
-        <div class="lib-item-name">${instIcon} ${esc(song.title||'無題')}</div>
-        <div class="lib-item-date">${song.lyricist ? '作詞: '+esc(song.lyricist) : ''}</div>
-      </div>
-      <span class="lib-official-badge">公式</span>
-    `;
-    item.addEventListener('click', () => {
-      loadSongData(song);
-      document.getElementById('officialOverlay').classList.remove('open');
-    });
-    body.appendChild(item);
-  });
-}
-
 // mob-tool-barボタンのイベント（全てadEventListenerで設定）
-(function() {
+window.addEventListener('load', function() {
   const map = {
     'mobToolNewBtn':    function() { newSong(); },
     'mobToolSaveBtn':   function() { saveSong(); },
     'mobToolHelpBtn':   function() { document.getElementById('helpOverlay').classList.add('open'); },
-    'mobToolExportBtn': function() { doExport(); },
-    'mobToolImportBtn': function() { document.getElementById('libImportFile').click(); },
     'mobToolChordBtn':  function() { if(typeof window.openChordPicker==='function') window.openChordPicker(); else document.getElementById('chordPickBtn').click(); },
     'mobToolInsertBtn': function() { document.getElementById('chordInsertInlineBtn').click(); },
+    'mobToolExportBtn': function() { doExport(); },
+    'mobToolImportBtn': function() { document.getElementById('libImportFile').click(); },
+    'mobOfficialBtn':   function() { document.getElementById('officialOverlay').classList.add('open'); renderOfficialModal(); },
   };
   Object.entries(map).forEach(([id, fn]) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('click', fn);
   });
-})();
+});
 // スマホ削除ボタン
 const mdb = document.getElementById('mobDelBtn');
 if (mdb) mdb.addEventListener('click', () => {
@@ -2564,7 +2232,7 @@ if (mdb) mdb.addEventListener('click', () => {
 
 // ── Mobile tab switching ──
 function switchMobTab(tab) {
-  if (window.innerWidth > 900 && !document.querySelector('.mob-top-tabs')) return;
+  if (window.innerWidth > 900) return;
   document.querySelectorAll('.editor-panel,.view-panel').forEach(p => p.classList.remove('mob-active'));
   document.querySelectorAll('.mob-top-tab').forEach(t => t.classList.remove('active'));
   const panel = document.querySelector(tab === 'edit' ? '.editor-panel' : '.view-panel');
@@ -2584,9 +2252,7 @@ const coEl = document.getElementById('composerInput'); if (coEl) coEl.value = ''
 render();
 // モバイル初期化
 window.addEventListener('load', function() {
-  if (window.innerWidth <= 900) {
-    switchMobTab('edit');
-  }
+  if (window.innerWidth <= 900) switchMobTab('edit');
 });
 
 // =====================================================================
@@ -2789,11 +2455,8 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
       <ul style="margin-top:8px;padding-left:16px;font-size:0.78rem;color:var(--text-dim);line-height:2;">
         <li>コード付き歌詞の作成・編集</li>
         <li>ウクレレ・ギター・ベース・キーボードのコード図表示</li>
-        <li>onコード（分数コード）対応</li>
         <li>コードの自動移調</li>
         <li>曲の保存・管理（複数曲対応）</li>
-        <li>YouTubeリンクの保存・表示</li>
-        <li>曲データのJSON書き出し・取り込み</li>
         <li>A4サイズで印刷・PDF保存</li>
         <li>5種類のカラーテーマ</li>
       </ul>
@@ -2809,34 +2472,14 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
     </div>
 
     <div class="help-section">
-      <h3>🎵 onコード（分数コード）の書き方</h3>
-      <p>ベース音を指定するonコードは <code>/</code> で書きます。</p>
-      <div class="example">
-        [C/E]君の[Am/G]声が[F/A]聞こえる<br>
-        [G/B]風に[C]乗って
-      </div>
-      <p style="margin-top:6px;">コードボタンの「onコードを使う」チェックでも入力できます。移調時もベース音が自動で変わります。</p>
-    </div>
-
-    <div class="help-section">
       <h3>🎹 コードの入力補助</h3>
-      <p>編集画面の <code>コード</code> ボタンでコード選択ポップアップが開きます。ルート音・コード種類を選んで <code>📋 コピー</code> でクリップボードにコピー、または <code>挿入</code> ボタンでカーソル位置に直接挿入できます。</p>
-    </div>
-
-    <div class="help-section">
-      <h3>🎬 YouTubeリンク</h3>
-      <p>編集画面の <code>🎬 YouTube</code> 欄にURLを貼り付けると、プレビューにリンクが表示されます。タップするとYouTubeが開きます。リンクは曲と一緒に保存されます。</p>
+      <p>編集画面の <code>コード</code> ボタンを押すとコード選択ポップアップが開きます。ルート音とコード種類を選んで <code>📋 コピー</code> を押すとクリップボードにコピーされます。</p>
+      <p style="margin-top:6px;">また、コードを選んだあと <code>挿入</code> ボタンを押すと、テキストエリアのカーソル位置に直接 <code>[Cm]</code> のような形で挿入できます。</p>
     </div>
 
     <div class="help-section">
       <h3>📚 曲の保存・管理</h3>
-      <p>タイトル・作詞者・作曲者を入力して <code>💾 保存</code> で保存します。スマホではプルダウンから曲を選択・読み込みできます。<code>🗑</code> ボタンで削除、<code>＋ 新規</code> で新しい曲を作れます。保存した曲はブラウザに記録されます。</p>
-    </div>
-
-    <div class="help-section">
-      <h3>📤 曲データの書き出し・取り込み</h3>
-      <p><code>🔼 書出</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>🔽 読込</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。他の人と曲データを共有するときに便利です。</p>
-      <p style="margin-top:6px;">曲リストの各曲の左にある☑️チェックボックスで曲を選び、<code>🔼 選択曲を書出</code> ボタンを押すと、選んだ曲だけのJSONを書き出せます。管理者に申請する時などに使ってください。</p>
+      <p>タイトル・作詞者・作曲者を入力して <code>💾 保存</code> ボタンで保存します。スマホでは編集画面上部のプルダウンから曲を選択・読み込みできます。<code>🗑</code> ボタンで削除も可能です。保存した曲はブラウザに記録されます。</p>
     </div>
 
     <div class="help-section">
@@ -2846,17 +2489,17 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 
     <div class="help-section">
       <h3>🔀 移調</h3>
-      <p>プレビュー上部の <code>−</code> <code>＋</code> ボタンで半音単位で移調できます。<code>↺</code> でリセット。onコードのベース音も自動で移調されます。</p>
+      <p>プレビュー上部の <code>−</code> <code>＋</code> ボタンで半音単位で移調できます。<code>↺</code> でリセット。移調した状態で保存することもできます。</p>
     </div>
 
     <div class="help-section">
       <h3>🖨 印刷・PDF保存</h3>
-      <p>プレビュー上部の <code>🖨 印刷</code> または <code>📄 PDF保存</code> ボタンでA4サイズに出力できます。コード図・タイトル・作詞作曲者も含めて印刷されます。</p>
+      <p>プレビュー上部の <code>🖨 印刷</code> または <code>📄 PDF保存</code> ボタンでA4サイズに出力できます。コード図も含めて印刷されます。</p>
     </div>
 
     <div class="help-section">
-      <h3>🎨 テーマ切り替え</h3>
-      <p>画面右上のプルダウンで <strong>ダーク・ライト・モノクロ・ロゼ・オーシャン</strong> の5種類から選べます。選んだテーマは次回も引き継がれます。</p>
+      <h3>🌙 テーマ切り替え</h3>
+      <p>画面右上の <code>🌙 ダーク</code> / <code>☀️ ライト</code> ボタンで背景の明暗を切り替えられます。</p>
     </div>
   </div>
 </div>
@@ -2982,7 +2625,7 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
     document.querySelectorAll('#cpSuffixGrid .cp-btn').forEach((b, i) => {
       b.classList.toggle('selected', SUFFIXES[i].val === selSuffix);
     });
-    const onPart = (useOn && selBass) ? '/' + selBass : '';
+    const onPart = (useOn && selBass) ? 'on' + selBass : '';
     document.getElementById('cpPreview').textContent = '[' + selRoot + selSuffix + onPart + ']';
     // コピーボタンをリセット
     const cb = document.getElementById('cpCopyBtn');
@@ -3064,7 +2707,7 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
 })();
 </script>
 
-<!-- 公式曲モーダル（スマホ用ボトムシート） -->
+<!-- 公式曲モーダル -->
 <div class="official-overlay" id="officialOverlay">
   <div class="official-modal">
     <div class="official-header">
@@ -3081,33 +2724,84 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
 </div>
 
 <style>
-.official-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.6); z-index: 300;
-  align-items: flex-end; justify-content: center;
-}
-.official-overlay.open { display: flex; }
-.official-modal {
-  background: var(--panel); border-radius: 16px 16px 0 0;
-  width: 100%; max-width: 600px; max-height: 80vh;
-  display: flex; flex-direction: column; overflow: hidden;
-}
-.official-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 16px; border-bottom: 1px solid var(--border);
-  font-size: 0.88rem; font-weight: 700; color: var(--accent-light);
-}
-.official-close {
-  background: none; border: none; color: var(--text-dim);
-  font-size: 1rem; cursor: pointer; padding: 4px;
-}
-.official-body { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; }
-.mob-official-btn {
-  background: var(--accent-dim); border: 1px solid var(--accent);
-  color: var(--accent-light); border-radius: 4px;
-  padding: 3px 7px; font-size: 0.8rem; cursor: pointer; flex-shrink: 0;
-}
+.official-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:flex-end; justify-content:center; }
+.official-overlay.open { display:flex; }
+.official-modal { background:var(--panel); border-radius:16px 16px 0 0; width:100%; max-width:600px; max-height:80vh; display:flex; flex-direction:column; overflow:hidden; }
+.official-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border); font-size:0.88rem; font-weight:700; color:var(--accent-light); }
+.official-close { background:none; border:none; color:var(--text-dim); font-size:1rem; cursor:pointer; padding:4px; }
+.official-body { overflow-y:auto; flex:1; -webkit-overflow-scrolling:touch; }
+.lib-official-item { padding:10px 12px; border-bottom:1px solid var(--border); cursor:pointer; display:flex; align-items:center; gap:8px; }
+.lib-official-item:hover { background:var(--panel2); }
+.lib-official-badge { font-size:0.58rem; background:var(--accent-dim); color:var(--accent-light); border:1px solid var(--accent); border-radius:3px; padding:1px 4px; white-space:nowrap; flex-shrink:0; }
 </style>
+
+<script>
+// 公式曲モーダル
+const OFFICIAL_URL = 'https://tonciki-dev.github.io/cordfu3/songs.json';
+const OFFICIAL_CACHE_KEY = 'officialSongsCache';
+
+document.getElementById('officialClose').addEventListener('click', () => {
+  document.getElementById('officialOverlay').classList.remove('open');
+});
+document.getElementById('officialOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
+document.getElementById('officialRefreshBtn').addEventListener('click', () => fetchOfficialSongs(true).then(renderOfficialModal));
+
+async function fetchOfficialSongs(forceRefresh=false) {
+  if (!forceRefresh) {
+    const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
+    if (cached) return;
+  }
+  try {
+    const res = await fetch(OFFICIAL_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('取得失敗');
+    const data = await res.json();
+    const songs = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : []);
+    localStorage.setItem(OFFICIAL_CACHE_KEY, JSON.stringify(songs));
+  } catch(e) {
+    console.warn('公式曲取得失敗:', e);
+  }
+}
+
+async function renderOfficialModal() {
+  const body = document.getElementById('officialBody');
+  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
+  await fetchOfficialSongs();
+  const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
+  const songs = cached ? JSON.parse(cached) : [];
+  body.innerHTML = '';
+  if (!songs || songs.length === 0) {
+    body.innerHTML = '<div class="lib-empty">公式曲がありません</div>';
+    return;
+  }
+  songs.forEach(song => {
+    const item = document.createElement('div');
+    item.className = 'lib-official-item';
+    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
+    item.innerHTML = '<div style="flex:1;min-width:0;"><div class="lib-item-name">' + instIcon + ' ' + esc(song.title||'無題') + '</div><div class="lib-item-date">' + (song.lyricist?'作詞: '+esc(song.lyricist):'') + '</div></div><span class="lib-official-badge">公式</span>';
+    item.addEventListener('click', () => {
+      loadSongData(song);
+      document.getElementById('officialOverlay').classList.remove('open');
+    });
+    body.appendChild(item);
+  });
+}
+
+function loadSongData(song) {
+  document.getElementById('titleInput').value = song.title||'';
+  document.getElementById('lyricsInput').value = song.lyrics||'';
+  const lEl=document.getElementById('lyricistInput'); if(lEl) lEl.value=song.lyricist||'';
+  const cEl=document.getElementById('composerInput'); if(cEl) cEl.value=song.composer||'';
+  const yEl=document.getElementById('youtubeInput');  if(yEl) yEl.value=song.youtube||'';
+  if(song.instrument) setInstrument(song.instrument);
+  transpose = song.transpose||0;
+  document.getElementById('transpVal').textContent = transpose===0?'±0':(transpose>0?'+':'')+transpose;
+  currentSongId = null;
+  render(); renderLibrary();
+  if(window.innerWidth<=900 && typeof switchMobTab==='function') switchMobTab('preview');
+}
+</script>
 
 <script>
 if ('serviceWorker' in navigator) {
