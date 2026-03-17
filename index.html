@@ -2402,8 +2402,13 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 <!-- Help Modal -->
 <div class="help-overlay" id="helpOverlay">
   <div class="help-modal">
-    <button class="help-close" id="helpClose">✕</button>
-    <h2>📖 使い方ガイド</h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 style="margin:0;">📖 使い方ガイド</h2>
+      <div style="display:flex;gap:6px;">
+        <button id="helpPrintBtn" style="background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:4px;padding:3px 10px;font-size:0.72rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;">🖨 印刷</button>
+        <button class="help-close" id="helpClose">✕</button>
+      </div>
+    </div>
 
     <div class="help-section">
       <h3>✨ このアプリでできること</h3>
@@ -2497,6 +2502,24 @@ document.getElementById('helpClose').addEventListener('click', () => {
 });
 document.getElementById('helpOverlay').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
+document.getElementById('helpPrintBtn').addEventListener('click', () => {
+  const modal = document.querySelector('.help-modal');
+  const w = window.open('', '_blank');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>使い方ガイド</title>'
+    + '<style>body{font-family:"Noto Sans JP",sans-serif;padding:20px;color:#222;font-size:13px;line-height:1.8;max-width:600px;margin:0 auto;}'
+    + 'h2{font-size:1.1rem;border-bottom:2px solid #c8a050;padding-bottom:6px;margin-bottom:16px;}'
+    + 'h3{font-size:0.9rem;color:#7a5010;margin:14px 0 4px;border-bottom:1px solid #eee;padding-bottom:3px;}'
+    + 'p{margin:0 0 6px;}code{background:#f5e8c0;padding:1px 5px;border-radius:3px;font-size:0.85rem;}'
+    + 'ul{padding-left:18px;margin:4px 0;}li{margin-bottom:3px;}'
+    + '.example{background:#f5f0e0;padding:8px 12px;border-radius:6px;font-size:0.82rem;margin:6px 0;}'
+    + '@media print{body{padding:10px;}}'
+    + '</style></head><body>'
+    + modal.innerHTML
+    + '</body></html>');
+  w.document.close();
+  w.focus();
+  setTimeout(() => { w.print(); }, 400);
 });
 </script>
 
