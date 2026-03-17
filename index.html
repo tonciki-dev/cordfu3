@@ -814,7 +814,8 @@ textarea::placeholder { color: var(--text-dim); }
   .editor-panel.mob-active { display: flex !important; flex-direction: column; }
   .view-panel.mob-active { display: flex !important; flex-direction: column; }
   .mob-song-select-wrap { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
-  .mob-tool-bar { display: flex !important; align-items: center; gap: 5px; padding: 5px 8px; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; flex-wrap: wrap; }
+  .mob-tool-bar { display: flex !important; flex-direction: column; gap: 0; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
+  .mob-tool-row { display: flex; align-items: center; gap: 5px; padding: 4px 8px; flex-wrap: nowrap; }
   .editor-panel .panel-bar { display: none !important; }
   .view-panel .panel-bar { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 5px !important; padding: 5px 8px !important; flex-shrink: 0 !important; }
   .editor-panel .title-row { flex-shrink: 0; flex-wrap: wrap; gap: 4px !important; padding: 4px 10px; }
@@ -906,16 +907,20 @@ textarea::placeholder { color: var(--text-dim); }
       <button class="mob-del-btn" id="mobDelBtn" title="選択中の曲を削除">🗑</button>
     </div>
     <div class="mob-tool-bar">
-      <span id="charCountMob" style="font-size:0.64rem;color:var(--text-dim);">0 文字</span>
-      <button class="chord-pick-btn" id="mobToolChordBtn">コード</button>
-      <button class="chord-insert-inline-btn" id="mobToolInsertBtn">挿入</button>
-      <span class="panel-divider"></span>
-      <button class="lib-new-btn" id="mobToolNewBtn">＋ 新規</button>
-      <button class="lib-save-btn" id="mobToolSaveBtn">💾 保存</button>
-      <button class="lib-export-btn" id="mobToolExportBtn" title="JSONで書き出し">🔼 書出</button>
-      <button class="lib-export-btn" id="mobToolImportBtn" title="JSONを取り込む">🔽 読込</button>
-      <button class="mob-official-btn" id="mobOfficialBtn">🎵公式</button>
-      <button class="help-btn" id="mobToolHelpBtn">説明</button>
+      <div class="mob-tool-row">
+        <span id="charCountMob" style="font-size:0.64rem;color:var(--text-dim);">0 文字</span>
+        <button class="chord-pick-btn" id="mobToolChordBtn">コード</button>
+        <button class="chord-insert-inline-btn" id="mobToolInsertBtn">挿入</button>
+        <span class="panel-divider"></span>
+        <button class="lib-new-btn" id="mobToolNewBtn">＋ 新規</button>
+        <button class="lib-save-btn" id="mobToolSaveBtn">💾 保存</button>
+        <button class="help-btn" id="mobToolHelpBtn">説明</button>
+      </div>
+      <div class="mob-tool-row">
+        <button class="lib-export-btn" id="mobToolExportBtn">▲書出</button>
+        <button class="lib-export-btn" id="mobToolImportBtn">▼読込</button>
+        <button class="mob-official-btn" id="mobOfficialBtn">🎵 公式曲</button>
+      </div>
     </div>
     <div class="panel-bar">
       <div class="bar-left"><div class="dot"></div>タイトル・歌詞</div>
