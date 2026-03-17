@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>コード譜職人</title>
 <!-- PWA -->
@@ -18,67 +17,64 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root {
-  --bg: #1e1a14;
-  --panel: #2a2318;
-  --panel2: #322b1e;
-  --border: #5a4a30;
+  --bg: #161616;
+  --panel: #1e1e1e;
+  --panel2: #242424;
+  --border: #333;
   --accent: #d4a044;
   --accent-dim: #7a5a20;
   --accent-light: #f0c870;
-  --text: #e8e0d0;
-  --text-dim: #888070;
+  --text: #e8e8e8;
+  --text-dim: #888;
   --chord-col: #f0c050;
   --unknown: #e05555;
-  --svg-bg-fill: #2a2318;
-  --svg-fret-stroke: #5a4a30;
-  --svg-str-stroke: #7a6040;
+  --svg-bg-fill: #1c1c1c;
+  --svg-fret-stroke: #333;
+  --svg-str-stroke: #6a5840;
   --svg-nut-fill: #c8863a;
   --svg-label-fill: #7a5030;
 }
 :root.light {
-  --bg: #faf7f0;
-  --panel: #ffffff;
-  --panel2: #f2ede0;
-  --border: #ddd5c0;
-  --accent: #b07828;
-  --accent-dim: #e8c878;
-  --accent-light: #8a5a10;
-  --text: #2a2010;
-  --text-dim: #907858;
-  --chord-col: #8a5a10;
+  --bg: #f5f0e8;
+  --panel: #fffdf6;
+  --panel2: #eee8d8;
+  --border: #d0c8b0;
+  --accent: #b07020;
+  --accent-dim: #d4a044;
+  --accent-light: #7a4a10;
+  --text: #1a1a1a;
+  --text-dim: #7a6a50;
+  --chord-col: #8a4a00;
   --unknown: #cc2222;
-  --svg-bg-fill: #ffffff;
-  --svg-fret-stroke: #ddd5c0;
-  --svg-str-stroke: #b0a080;
-  --svg-nut-fill: #b07828;
-  --svg-label-fill: #9a8060;
+  --svg-bg-fill: #fffdf6;
+  --svg-fret-stroke: #c8c0a8;
+  --svg-str-stroke: #a09070;
+  --svg-nut-fill: #b07020;
+  --svg-label-fill: #9a7040;
 }
-/* ── モノクロ（淡いグレー） ── */
 :root.monochrome {
-  --bg: #f5f5f5; --panel: #ffffff; --panel2: #eeeeee; --border: #cccccc;
-  --accent: #666666; --accent-dim: #cccccc; --accent-light: #333333;
-  --text: #222222; --text-dim: #888888; --chord-col: #444444; --unknown: #cc2222;
-  --svg-bg-fill: #ffffff; --svg-fret-stroke: #cccccc; --svg-str-stroke: #aaaaaa;
-  --svg-nut-fill: #666666; --svg-label-fill: #999999;
+  --bg:#f5f5f5;--panel:#fff;--panel2:#eee;--border:#ccc;--accent:#666;--accent-dim:#ccc;--accent-light:#333;
+  --text:#222;--text-dim:#888;--chord-col:#444;--unknown:#c22;
+  --svg-bg-fill:#fff;--svg-fret-stroke:#ccc;--svg-str-stroke:#aaa;--svg-nut-fill:#666;--svg-label-fill:#999;
 }
-/* ── ロゼ（淡いピンク） ── */
 :root.rose {
-  --bg: #fff0f3; --panel: #ffffff; --panel2: #ffe8ed; --border: #f0c0cc;
-  --accent: #d05070; --accent-dim: #f8c0cc; --accent-light: #a02848;
-  --text: #2a1018; --text-dim: #b07080; --chord-col: #a02848; --unknown: #cc2222;
-  --svg-bg-fill: #ffffff; --svg-fret-stroke: #f0c0cc; --svg-str-stroke: #d08090;
-  --svg-nut-fill: #d05070; --svg-label-fill: #c07080;
+  --bg:#fff0f3;--panel:#fff;--panel2:#ffe8ed;--border:#f0c0cc;--accent:#d05070;--accent-dim:#f8c0cc;--accent-light:#a02848;
+  --text:#2a1018;--text-dim:#b07080;--chord-col:#a02848;--unknown:#c22;
+  --svg-bg-fill:#fff;--svg-fret-stroke:#f0c0cc;--svg-str-stroke:#d08090;--svg-nut-fill:#d05070;--svg-label-fill:#c07080;
 }
-/* ── オーシャン（淡いティール） ── */
 :root.ocean {
-  --bg: #eef8f8; --panel: #ffffff; --panel2: #e0f4f4; --border: #a8d8d8;
-  --accent: #1898a0; --accent-dim: #a0dce0; --accent-light: #0a6870;
-  --text: #082828; --text-dim: #508888; --chord-col: #0a6870; --unknown: #cc2222;
-  --svg-bg-fill: #ffffff; --svg-fret-stroke: #a8d8d8; --svg-str-stroke: #80b8b8;
-  --svg-nut-fill: #1898a0; --svg-label-fill: #508888;
+  --bg:#eef8f8;--panel:#fff;--panel2:#e0f4f4;--border:#a8d8d8;--accent:#1898a0;--accent-dim:#a0dce0;--accent-light:#0a6870;
+  --text:#082828;--text-dim:#508888;--chord-col:#0a6870;--unknown:#c22;
+  --svg-bg-fill:#fff;--svg-fret-stroke:#a8d8d8;--svg-str-stroke:#80b8b8;--svg-nut-fill:#1898a0;--svg-label-fill:#508888;
 }
 
 /* Theme toggle */
+.theme-select {
+  background:var(--panel2);color:var(--text-dim);border:1px solid var(--border);
+  border-radius:20px;padding:4px 10px;font-size:0.72rem;
+  font-family:'Noto Sans JP',sans-serif;cursor:pointer;outline:none;
+  -webkit-appearance:none;appearance:none;
+}
 .theme-btn {
   margin-left: auto;
   background: none;
@@ -192,6 +188,12 @@ header {
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
 }
+.lib-export-btn {
+  background:none;border:1px solid var(--border);color:var(--text-dim);
+  border-radius:4px;padding:2px 7px;font-size:0.72rem;
+  font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all 0.15s;white-space:nowrap;
+}
+.lib-export-btn:hover{border-color:var(--accent);color:var(--accent-light);}
 .lib-new-btn {
   background: none;
   border: 1px solid var(--border);
@@ -269,10 +271,16 @@ header {
   color: var(--text-dim);
   border-bottom: 1px solid var(--border);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+}
+.panel-bar .bar-left { flex: 1; }
+.panel-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  flex-shrink: 0;
 }
 .bar-left { display: flex; align-items: center; gap: 6px; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
@@ -297,20 +305,26 @@ header {
 .lib-save-btn:hover { background: var(--accent-dim); color: #fff; }
 .lib-save-btn.saved { border-color: #4a8a4a; color: #80d080; }
 .help-btn {
-  background: rgba(200,40,40,0.12);
-  border: 2px solid #cc3333;
-  color: #ff6666;
-  border-radius: 6px;
-  padding: 2px 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 50%;
+  width: 22px; height: 22px;
   font-size: 0.72rem;
   font-family: 'Noto Sans JP', sans-serif;
   cursor: pointer;
   transition: all 0.15s;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  font-weight: 700;
 }
 .help-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+.help-btn-red {
+  background:rgba(200,40,40,0.12);border:2px solid #cc3333;color:#ff6666;
+  border-radius:6px;padding:2px 8px;font-size:0.72rem;font-family:'Noto Sans JP',sans-serif;
+  cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-weight:700;
+}
+.help-btn-red:hover{background:#cc3333;color:#fff;}
 .chord-pick-btn {
   background: none;
   border: 1px solid var(--accent-dim);
@@ -354,7 +368,7 @@ header {
   border-radius: 12px;
   padding: 18px 18px 16px;
   width: min(420px, calc(100vw - 24px));
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   position: relative;
@@ -381,16 +395,16 @@ header {
 }
 .cp-suffix-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
 }
 .cp-btn {
   background: var(--panel2);
   border: 1px solid var(--border);
   color: var(--text-dim);
   border-radius: 5px;
-  padding: 5px 2px;
-  font-size: 0.7rem;
+  padding: 6px 2px;
+  font-size: 0.75rem;
   font-family: 'Noto Sans JP', sans-serif;
   cursor: pointer;
   transition: all 0.12s;
@@ -512,21 +526,6 @@ header {
   color: var(--text);
   line-height: 1.9;
 }
-.help-print-btn {
-  display: block;
-  margin: 0 0 14px auto;
-  background: var(--accent-dim);
-  border: 1px solid var(--accent);
-  color: var(--accent-light);
-  border-radius: 6px;
-  padding: 5px 14px;
-  font-size: 0.78rem;
-  font-family: 'Noto Sans JP', sans-serif;
-  cursor: pointer;
-  transition: all 0.15s;
-  font-weight: 700;
-}
-.help-print-btn:hover { background: var(--accent); color: #fff; }
 .help-close {
   position: absolute; top: 14px; right: 16px;
   background: none; border: none;
@@ -677,7 +676,7 @@ textarea::placeholder { color: var(--text-dim); }
 .mob-tool-bar { display: none; }
 .mob-song-select {
   flex: 1; background: var(--panel); color: var(--text);
-  border: 1px solid var(--border); border-radius: 4px;
+  border: 1px solid var(--border); border-radius: 6px;
   padding: 6px 10px; font-size: 0.88rem;
   font-family: "Noto Sans JP", sans-serif;
   outline: none; -webkit-appearance: none; appearance: none; cursor: pointer;
@@ -695,45 +694,96 @@ textarea::placeholder { color: var(--text-dim); }
 }
 .mob-del-btn:hover { border-color: var(--unknown); color: var(--unknown); background: rgba(200,50,50,0.1); }
 @media (max-width: 900px) {
-  body { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
-  header { padding: 6px 12px; flex-shrink: 0; flex-wrap: nowrap; }
-  .logo { font-size: 0.9rem; }
-  .hint { display: none; }
-  .theme-select {
-  background: var(--panel2);
-  color: var(--text-dim);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 0.72rem;
-  font-family: 'Noto Sans JP', sans-serif;
-  cursor: pointer;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-  margin-left: auto;
+  body { display:flex; flex-direction:column; height:100dvh; overflow:hidden; }
+  header { padding:6px 12px; flex-shrink:0; flex-wrap:nowrap; }
+  .logo { font-size:0.9rem; }
+  .hint { display:none; }
+  .theme-btn { padding:3px 10px; font-size:0.68rem; }
+  .theme-select { padding:3px 8px; font-size:0.68rem; }
+  .inst-bar { padding:3px 8px; flex-wrap:nowrap; flex-shrink:0; }
+  .inst-label { display:none; }
+  .inst-btn { flex:1; min-width:0; justify-content:center; padding:3px 2px; font-size:0.68rem; white-space:nowrap; border-radius:4px; }
+  .mob-top-tabs { display:flex; flex-shrink:0; background:var(--panel2); border-bottom:1px solid var(--border); }
+  .mob-top-tab { flex:1; background:none; border:none; border-bottom:2px solid transparent; color:var(--text-dim); font-family:"Noto Sans JP",sans-serif; font-size:0.8rem; padding:7px 4px; cursor:pointer; transition:all 0.15s; display:flex; align-items:center; justify-content:center; gap:4px; }
+  .mob-top-tab.active { color:var(--accent-light); border-bottom-color:var(--accent); background:rgba(212,160,68,0.07); }
+  .workspace { flex:1; min-height:0; grid-template-columns:1fr; grid-template-rows:1fr; overflow:hidden; display:grid; }
+  .library-panel { display:none !important; }
+  .editor-panel { display:none; border-right:none; flex-direction:column; overflow:hidden; }
+  .view-panel { display:none; flex-direction:column; overflow:hidden; }
+  .editor-panel.mob-active, .view-panel.mob-active { display:flex; }
+  .mob-song-select-wrap { display:flex; align-items:center; gap:6px; padding:5px 10px; border-bottom:1px solid var(--border); background:var(--panel2); flex-shrink:0; }
+  .mob-tool-bar { display:flex !important; align-items:center; gap:4px; padding:5px 8px; border-bottom:1px solid var(--border); background:var(--panel2); flex-shrink:0; flex-wrap:wrap; }
+  .panel-bar { display:none !important; }
+  .view-panel .panel-bar { display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:5px !important; padding:5px 8px !important; flex-shrink:0 !important; }
+  .editor-panel .title-row { flex-shrink:0; flex-wrap:wrap; gap:4px !important; padding:4px 10px; }
+  .title-input { font-size:0.95rem !important; }
+  textarea { flex:1; min-height:0; font-size:1rem; line-height:1.9; padding:10px 12px; -webkit-text-size-adjust:100%; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .view-scroll { flex:1; min-height:0; padding:14px 12px 24px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .lib-item { padding:11px 10px; }
+  .lib-item-name { font-size:0.9rem; }
 }
 .theme-btn { padding: 3px 10px; font-size: 0.68rem; }
+
   .inst-bar { padding: 3px 8px; flex-wrap: nowrap; flex-shrink: 0; }
   .inst-label { display: none; }
-  .inst-btn { flex: 1; min-width: 0; justify-content: center; padding: 3px 2px; font-size: 0.68rem; white-space: nowrap; border-radius: 4px; }
+  .inst-btn {
+    flex: 1; min-width: 0; justify-content: center;
+    padding: 3px 2px; font-size: 0.68rem;
+    white-space: nowrap; border-radius: 4px;
+  }
+
   .mob-top-tabs { display: flex; flex-shrink: 0; background: var(--panel2); border-bottom: 1px solid var(--border); }
-  .mob-top-tab { flex: 1; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-dim); font-family: "Noto Sans JP", sans-serif; font-size: 0.8rem; padding: 7px 4px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .mob-top-tab {
+    flex: 1; background: none; border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-dim); font-family: "Noto Sans JP", sans-serif;
+    font-size: 0.8rem; padding: 7px 4px; cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
   .mob-top-tab.active { color: var(--accent-light); border-bottom-color: var(--accent); background: rgba(212,160,68,0.07); }
+
   .workspace { flex: 1; min-height: 0; grid-template-columns: 1fr; grid-template-rows: 1fr; overflow: hidden; display: grid; }
+
   .library-panel { display: none !important; }
-  .editor-panel { display: none !important; border-right: none; flex-direction: column; overflow: hidden; }
-  .view-panel { display: none !important; flex-direction: column; overflow: hidden; }
-  .editor-panel.mob-active { display: flex !important; flex-direction: column; }
-  .view-panel.mob-active { display: flex !important; flex-direction: column; }
-  .mob-song-select-wrap { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
-  .mob-tool-bar { display: flex !important; flex-direction: column; gap: 0; border-bottom: 1px solid var(--border); background: var(--panel2); flex-shrink: 0; }
-  .mob-tool-row { display: flex; align-items: center; gap: 5px; padding: 4px 8px; flex-wrap: nowrap; }
-  .panel-bar { display: none !important; }
+  .editor-panel  { display: none; border-right: none; flex-direction: column; overflow: hidden; }
+  .view-panel    { display: none; flex-direction: column; overflow: hidden; }
+  .editor-panel.mob-active, .view-panel.mob-active { display: flex; }
+
+  .mob-song-select-wrap {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 10px; border-bottom: 1px solid var(--border);
+    background: var(--panel2); flex-shrink: 0;
+  }
+
+  /* panel-bar：!importantでPC用CSSの競合を完全に上書き */
+  .panel-bar {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 5px !important;
+    padding: 5px 8px !important;
+    overflow: visible !important;
+  }
+  .bar-left { display: none !important; }
+
   .editor-panel .title-row { flex-shrink: 0; flex-wrap: wrap; gap: 4px !important; padding: 4px 10px; }
   .title-input { font-size: 0.95rem !important; }
-  textarea { flex: 1; min-height: 0; font-size: 1rem; line-height: 1.9; padding: 10px 12px; -webkit-text-size-adjust: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  .view-scroll { flex: 1; min-height: 0; padding: 14px 12px 24px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  textarea {
+    flex: 1; min-height: 0;
+    font-size: 1rem; line-height: 1.9; padding: 10px 12px;
+    -webkit-text-size-adjust: 100%;
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+  }
+
+  .view-scroll {
+    flex: 1; min-height: 0; padding: 14px 12px 24px;
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+  }
+
   .lib-item { padding: 11px 10px; }
   .lib-item-name { font-size: 0.9rem; }
 }
@@ -776,8 +826,14 @@ textarea::placeholder { color: var(--text-dim); }
   <!-- ── Song library ── -->
   <div class="library-panel">
     <div class="lib-bar">
-      <span>📚 曲リスト</span>
-      <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
+      <span>📚 マイ曲</span>
+      <div style="display:flex;gap:4px;">
+        <button class="lib-export-btn" id="libExportBtn" title="JSONで書き出し">🔼 書出</button>
+        <button class="lib-export-btn" id="libImportBtn" title="JSONを取り込む">🔽 読込</button>
+        <input type="file" id="libImportFile" accept=".json" style="display:none;">
+        <button class="lib-export-btn" id="libOfficialBtn" title="公式曲リスト">🎵 公式曲</button>
+        <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
+      </div>
     </div>
     <div class="lib-list" id="libList">
       <div class="lib-empty" id="libEmpty">保存した曲が<br>ここに表示されます</div>
@@ -792,29 +848,25 @@ textarea::placeholder { color: var(--text-dim); }
       <button class="mob-del-btn" id="mobDelBtn" title="選択中の曲を削除">🗑</button>
     </div>
     <div class="mob-tool-bar">
-      <div class="mob-tool-row">
-        <span id="charCountMob" style="font-size:0.64rem;color:var(--text-dim);">0 文字</span>
-        <button class="chord-pick-btn" id="mobToolChordBtn">コード</button>
-        <button class="chord-insert-inline-btn" id="mobToolInsertBtn">挿入</button>
-        <span class="panel-divider"></span>
-        <button class="lib-new-btn" id="mobToolNewBtn">＋ 新規</button>
-        <button class="lib-save-btn" id="mobToolSaveBtn">💾 保存</button>
-        <button class="help-btn" id="mobToolHelpBtn">説明</button>
-      </div>
-      <div class="mob-tool-row">
-        <button class="lib-export-btn" id="mobToolExportBtn">▲書出</button>
-        <button class="lib-export-btn" id="mobToolImportBtn">▼読込</button>
-        <button class="mob-official-btn" id="mobOfficialBtn">🎵 公式曲</button>
-      </div>
+      <span id="charCountMob" style="font-size:0.64rem;color:var(--text-dim);">0 文字</span>
+      <button class="chord-pick-btn" id="mobChordBtn">コード</button>
+      <button class="chord-insert-inline-btn" id="mobInsertBtn">挿入</button>
+      <span class="panel-divider"></span>
+      <button class="lib-new-btn" id="mobNewBtn">＋ 新規</button>
+      <button class="lib-save-btn" id="mobSaveBtn">💾 保存</button>
+      <button class="lib-export-btn" id="mobExportBtn">🔼 書出</button>
+      <button class="lib-export-btn" id="mobImportBtn">🔽 読込</button>
+      <button class="lib-export-btn" id="mobOfficialBtn">🎵 公式</button>
+      <button class="help-btn help-btn-red" id="mobHelpBtn">説明</button>
     </div>
     <div class="panel-bar">
       <div class="bar-left"><div class="dot"></div>タイトル・歌詞</div>
-      <span id="charCount" style="font-size:0.64rem;">0 文字</span>
-        <button class="chord-pick-btn" id="chordPickBtn" title="コードを選択">コード</button>
-        <button class="chord-insert-inline-btn" id="chordInsertInlineBtn" title="カーソル位置に挿入">挿入</button>
-        <span style="width:1px;background:var(--border);align-self:stretch;margin:0 3px;"></span>
-        <button class="lib-save-btn" id="libSaveBtn">💾 保存</button>
-        <button class="help-btn" id="helpBtn" title="使い方">説明</button>
+      <span id="charCount" style="font-size:0.64rem;color:var(--text-dim);">0 文字</span>
+      <button class="chord-pick-btn" id="chordPickBtn" title="コードを選択">コード</button>
+      <button class="chord-insert-inline-btn" id="chordInsertInlineBtn" title="カーソル位置に挿入">挿入</button>
+      <span class="panel-divider"></span>
+      <button class="lib-save-btn" id="libSaveBtn">💾 保存</button>
+      <button class="help-btn help-btn-red" id="helpBtn" title="使い方" style="display:none;">説明</button>
     </div>
     <div class="title-row">
       <span class="title-label">タイトル</span>
@@ -879,18 +931,13 @@ function rootIdx(r){ return ROOT_IDX[r] ?? -1; }
 function idxToRoot(i,flat){ i=((i%12)+12)%12; return (flat||FLAT_PREFERRED.has(i))?FLATS[i]:SHARPS[i]; }
 function parseChord(raw){
   const n=raw.replace(/♭/g,'b').replace(/♯/g,'#');
-  // onコード対応: ConE → root=C, suffix='', bass='E'
-  const onMatch = n.match(/^([A-G][#b]?)([^/on]*)on([A-G][#b]?)$/);
-  if(onMatch){
-    const idx=rootIdx(onMatch[1]);
-    if(idx<0)return null;
-    const bassIdx=rootIdx(onMatch[3]);
-    return{root:onMatch[1],suffix:onMatch[2],idx,bass:onMatch[3],bassIdx};
-  }
+  const sm=n.match(/^([A-G][#b]?)([^/]*)\/([A-G][#b]?)$/);
+  const om=n.match(/^([A-G][#b]?)([^on]*)on([A-G][#b]?)$/);
+  const m2=sm||om;
+  if(m2){const idx=rootIdx(m2[1]);if(idx<0)return null;return{root:m2[1],suffix:m2[2],idx,bass:m2[3],bassIdx:rootIdx(m2[3])};}
   const m=n.match(/^([A-G][#b]?)(.*)/);
   if(!m)return null;
-  const idx=rootIdx(m[1]);
-  if(idx<0)return null;
+  const idx=rootIdx(m[1]);if(idx<0)return null;
   return{root:m[1],suffix:m[2],idx};
 }
 function transposeChord(raw,st){
@@ -899,14 +946,9 @@ function transposeChord(raw,st){
   if(!p)return raw;
   const ni=((p.idx+st)%12+12)%12;
   const flat=raw.includes('b')||raw.includes('♭');
-  const newRoot=idxToRoot(ni,flat)+p.suffix;
-  // onコードのベース音も移調
-  if(p.bass){
-    const bi=((p.bassIdx+st)%12+12)%12;
-    const bflat=p.bass.includes('b');
-    return newRoot+'on'+idxToRoot(bi,bflat);
-  }
-  return newRoot;
+  const nr=idxToRoot(ni,flat)+p.suffix;
+  if(p.bass){const bi=((p.bassIdx+st)%12+12)%12;return nr+'/'+idxToRoot(bi,p.bass.includes('b'));}
+  return nr;
 }
 
 // =====================================================================
@@ -1445,14 +1487,7 @@ function getKeyboardTones(chordName) {
   const norm = p.suffix.replace(/[Mm]aj7/,'M7').replace(/[Mm]aj9/,'M9');
   const intervals = CHORD_INTERVALS[norm];
   if (!intervals) return null;
-  const tones = intervals.map(i => (p.idx + i) % 12);
-  // onコードの場合はベース音を追加（重複していれば置き換え）
-  if (p.bass !== undefined && p.bassIdx !== undefined) {
-    const bassNote = ((p.bassIdx % 12) + 12) % 12;
-    // ベース音がトーンに含まれていなければ先頭に追加
-    if (!tones.includes(bassNote)) tones.unshift(bassNote);
-  }
-  return tones;
+  return intervals.map(i => (p.idx + i) % 12);
 }
 
 // =====================================================================
@@ -1468,36 +1503,6 @@ const ENHARMONIC = {
 function lookup(chordName, inst) {
   let s = chordName.replace(/♭/g,'b').replace(/♯/g,'#')
                    .replace(/[Mm]aj7/,'M7').replace(/[Mm]aj9/,'M9');
-  // onコードの場合はベース音部分を分離してルートコードで検索
-  const onMatch = s.match(/^([A-G][#b]?.*)on([A-G][#b]?)$/);
-  if (onMatch) {
-    const baseChord = onMatch[1];
-    const bassNote  = onMatch[2];
-    if (inst === 'keyboard') {
-      // キーボード: ベース音 + コードトーンで返す
-      return getKeyboardTones(baseChord) ? chordName : null;
-    }
-    if (inst === 'bass') {
-      // ベース: ベース音のポジションを返す
-      const db = INSTRUMENT_DB['bass'];
-      const bassKey = bassNote;
-      if (db[bassKey]) return db[bassKey];
-      const altBass = ENHARMONIC[bassNote];
-      if (altBass && db[altBass]) return db[altBass];
-      return null;
-    }
-    // ウクレレ・ギター: onコード専用DBを探し、なければベースコードで代替
-    const db = INSTRUMENT_DB[inst] || DB_UKULELE;
-    if (db[s]) return db[s];
-    // 異名同音
-    const altRoot = ENHARMONIC[baseChord.match(/^([A-G][#b]?)/)?.[1]];
-    if (altRoot) {
-      const altKey = altRoot + baseChord.slice(baseChord.match(/^([A-G][#b]?)/)[0].length) + 'on' + bassNote;
-      if (db[altKey]) return db[altKey];
-    }
-    // ベースコードで代替表示
-    return lookup(baseChord, inst);
-  }
   if (inst === 'keyboard') return getKeyboardTones(s) ? chordName : null;
   const db = INSTRUMENT_DB[inst] || DB_UKULELE;
   if (db[s]) return db[s];
@@ -1814,7 +1819,7 @@ const INST_LABEL = { ukulele:'ウクレレ', guitar:'ギター', bass:'ベース
 function render() {
   const raw = textarea.value;
   document.getElementById('charCount').textContent = raw.length + ' 文字';
-  const ccm = document.getElementById('charCountMob'); if(ccm) ccm.textContent = raw.length + ' 文字';
+  const ccm=document.getElementById('charCountMob');if(ccm)ccm.textContent=raw.length+' 文字';
   printTitle.textContent = titleInput.value.trim();
   const metaParts = [];
   const lyricist = (document.getElementById('lyricistInput')||{value:''}).value.trim();
@@ -1822,15 +1827,20 @@ function render() {
   const youtube  = (document.getElementById('youtubeInput')||{value:''}).value.trim();
   if (lyricist) metaParts.push('作詞: ' + lyricist);
   if (composer) metaParts.push('作曲: ' + composer);
-  const ytEl = document.getElementById('printYoutube');
-  if (ytEl) {
-    if (youtube) {
-      ytEl.innerHTML = '🎬 <a href="' + esc(youtube) + '" target="_blank" style="color:var(--accent-light);font-size:0.72rem;word-break:break-all;">' + esc(youtube) + '</a>';
-      ytEl.style.display = '';
-    } else {
-      ytEl.innerHTML = '';
-      ytEl.style.display = 'none';
-    }
+  const ytEl=document.getElementById('printYoutube');
+  if(ytEl){
+    if(youtube){
+      const ytId=youtube.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+      if(ytId){
+        ytEl.innerHTML='<a href="'+esc(youtube)+'" target="_blank" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">'
+          +'<img src="https://img.youtube.com/vi/'+ytId[1]+'/mqdefault.jpg" style="width:120px;height:68px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid var(--border);">'
+          +'<span style="color:var(--accent-light);font-size:0.72rem;word-break:break-all;line-height:1.5;">▶ '+esc(youtube)+'</span>'
+          +'</a>';
+      } else {
+        ytEl.innerHTML='🎬 <a href="'+esc(youtube)+'" target="_blank" style="color:var(--accent-light);font-size:0.72rem;word-break:break-all;">'+esc(youtube)+'</a>';
+      }
+      ytEl.style.display='';
+    } else { ytEl.innerHTML=''; ytEl.style.display='none'; }
   }
   if (INST_LABEL[INSTRUMENT]) metaParts.push(INST_LABEL[INSTRUMENT]);
   if (transpose !== 0) metaParts.push(`移調: ${transpLabel(transpose)}`);
@@ -1907,6 +1917,13 @@ textarea.addEventListener('input', render);
 titleInput.addEventListener('input', render);
 
 // Instrument
+function setInstrument(inst) {
+  INSTRUMENT = inst;
+  document.querySelectorAll('.inst-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.inst===inst);
+  });
+  render();
+}
 document.querySelectorAll('.inst-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.inst-btn').forEach(b=>b.classList.remove('active'));
@@ -1944,18 +1961,12 @@ document.querySelectorAll('.ctrl-btn[data-size]').forEach(btn => {
 });
 
 // ── Theme select ──
-const THEMES = ['dark','light','monochrome','rose','ocean'];
-const themeSelect = document.getElementById('themeSelect');
-let currentTheme = localStorage.getItem('theme') || 'dark';
-function applyTheme(theme) {
-  THEMES.forEach(t => document.documentElement.classList.remove(t));
-  if (theme !== 'dark') document.documentElement.classList.add(theme);
-  currentTheme = theme;
-  if (themeSelect) themeSelect.value = theme;
-  localStorage.setItem('theme', theme);
-}
+const THEMES=['dark','light','monochrome','rose','ocean'];
+const themeSelect=document.getElementById('themeSelect');
+let currentTheme=localStorage.getItem('theme')||'dark';
+function applyTheme(t){THEMES.forEach(x=>document.documentElement.classList.remove(x));if(t!=='dark')document.documentElement.classList.add(t);currentTheme=t;if(themeSelect)themeSelect.value=t;localStorage.setItem('theme',t);}
 applyTheme(currentTheme);
-if (themeSelect) themeSelect.addEventListener('change', () => applyTheme(themeSelect.value));
+if(themeSelect)themeSelect.addEventListener('change',()=>applyTheme(themeSelect.value));
 
 // =====================================================================
 // SONG LIBRARY  (localStorage)
@@ -2058,8 +2069,8 @@ function loadSong(id) {
   document.getElementById('titleInput').value  = song.title    || '';
   document.getElementById('lyricsInput').value = song.lyrics   || '';
   const lEl = document.getElementById('lyricistInput'); if (lEl) lEl.value = song.lyricist || '';
-  const cEl = document.getElementById('composerInput'); if (cEl) cEl.value = song.composer || '';
   const yEl = document.getElementById('youtubeInput'); if (yEl) yEl.value = song.youtube || '';
+  const cEl = document.getElementById('composerInput'); if (cEl) cEl.value = song.composer || '';
   if (song.instrument) {
     INSTRUMENT = song.instrument;
     document.querySelectorAll('.inst-btn').forEach(b => b.classList.toggle('active', b.dataset.inst === INSTRUMENT));
@@ -2081,7 +2092,6 @@ function deleteSong(id) {
     document.getElementById('lyricsInput').value = '';
     const lD = document.getElementById('lyricistInput'); if (lD) lD.value = '';
     const cD = document.getElementById('composerInput'); if (cD) cD.value = '';
-    const yD = document.getElementById('youtubeInput'); if (yD) yD.value = '';
     render();
   }
   renderLibrary();
@@ -2096,8 +2106,8 @@ function newSong() {
   document.getElementById('titleInput').value  = '';
   document.getElementById('lyricsInput').value = '';
   const lN = document.getElementById('lyricistInput'); if (lN) lN.value = '';
-  const cN = document.getElementById('composerInput'); if (cN) cN.value = '';
   const yN = document.getElementById('youtubeInput'); if (yN) yN.value = '';
+  const cN = document.getElementById('composerInput'); if (cN) cN.value = '';
   transpose = 0;
   document.getElementById('transpVal').textContent = '±0';
   render();
@@ -2112,71 +2122,20 @@ function flashSaved() {
   setTimeout(() => { btn.textContent = '💾 保存'; btn.classList.remove('saved'); }, 1800);
 }
 
-// JSON エクスポート
-function doExport() {
-  const songs = loadSongs();
-  if (songs.length === 0) { alert('保存された曲がありません。'); return; }
-  const data = { app: 'コード譜職人', version: 1, exportedAt: new Date().toISOString(), songs };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href=url; a.download='コード譜職人_'+new Date().toISOString().slice(0,10)+'.json';
-  a.click(); URL.revokeObjectURL(url);
-}
-document.getElementById('libExportBtn').addEventListener('click', doExport);
-document.getElementById('libImportBtn').addEventListener('click', () => document.getElementById('libImportFile').click());
-document.getElementById('libImportFile').addEventListener('change', function() {
-  if (!this.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const data = JSON.parse(e.target.result);
-      const imported = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : null);
-      if (!imported) { alert('対応していない形式のファイルです。'); return; }
-      const existing = loadSongs();
-      const existingIds = new Set(existing.map(s => s.id));
-      const toAdd = imported.map(s => existingIds.has(s.id) ? {...s, id:genId(), createdAt:Date.now(), updatedAt:Date.now()} : s);
-      saveSongs([...toAdd, ...existing]);
-      renderLibrary();
-      alert(toAdd.length + '曲を取り込みました！');
-    } catch(err) { alert('読み込みに失敗しました: ' + err.message); }
-  };
-  reader.readAsText(this.files[0], 'utf-8');
-  this.value = '';
-});
-
 document.getElementById('libSaveBtn').addEventListener('click', saveSong);
 document.getElementById('libNewBtn').addEventListener('click', newSong);
-['lyricsInput','titleInput','lyricistInput','composerInput','youtubeInput'].forEach(id => {
+['lyricsInput','titleInput','lyricistInput','composerInput'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => {
     const btn = document.getElementById('libSaveBtn');
     btn.textContent = '💾 保存*'; btn.classList.remove('saved');
   });
 });
-['lyricistInput','composerInput','youtubeInput'].forEach(id => {
+['lyricistInput','composerInput'].forEach(id => {
   const el = document.getElementById(id); if (el) el.addEventListener('input', render);
 });
 const lnb = document.getElementById('libNewBtnMob'); if (lnb) lnb.addEventListener('click', newSong);
 const mss = document.getElementById('mobSongSelect'); if (mss) mss.addEventListener('change', function() { if (this.value) loadSong(this.value); });
-
-// mob-tool-barボタンのイベント（全てadEventListenerで設定）
-window.addEventListener('load', function() {
-  const map = {
-    'mobToolNewBtn':    function() { newSong(); },
-    'mobToolSaveBtn':   function() { saveSong(); },
-    'mobToolHelpBtn':   function() { document.getElementById('helpOverlay').classList.add('open'); },
-    'mobToolChordBtn':  function() { if(typeof window.openChordPicker==='function') window.openChordPicker(); else document.getElementById('chordPickBtn').click(); },
-    'mobToolInsertBtn': function() { document.getElementById('chordInsertInlineBtn').click(); },
-    'mobToolExportBtn': function() { doExport(); },
-    'mobToolImportBtn': function() { document.getElementById('libImportFile').click(); },
-    'mobOfficialBtn':   function() { document.getElementById('officialOverlay').classList.add('open'); renderOfficialModal(); },
-  };
-  Object.entries(map).forEach(([id, fn]) => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', fn);
-  });
-});
 // スマホ削除ボタン
 const mdb = document.getElementById('mobDelBtn');
 if (mdb) mdb.addEventListener('click', () => {
@@ -2251,9 +2210,7 @@ const liEl = document.getElementById('lyricistInput'); if (liEl) liEl.value = ''
 const coEl = document.getElementById('composerInput'); if (coEl) coEl.value = '';
 render();
 // モバイル初期化
-window.addEventListener('load', function() {
-  if (window.innerWidth <= 900) switchMobTab('edit');
-});
+window.addEventListener('load',function(){if(window.innerWidth<=900)switchMobTab('edit');});
 
 // =====================================================================
 // SHARED CAPTURE  (used by both PDF and Print)
@@ -2447,7 +2404,6 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
   <div class="help-modal">
     <button class="help-close" id="helpClose">✕</button>
     <h2>📖 使い方ガイド</h2>
-    <button class="help-print-btn" id="helpPrintBtn">🖨 印刷</button>
 
     <div class="help-section">
       <h3>✨ このアプリでできること</h3>
@@ -2455,8 +2411,12 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
       <ul style="margin-top:8px;padding-left:16px;font-size:0.78rem;color:var(--text-dim);line-height:2;">
         <li>コード付き歌詞の作成・編集</li>
         <li>ウクレレ・ギター・ベース・キーボードのコード図表示</li>
+        <li>onコード（分数コード）対応</li>
         <li>コードの自動移調</li>
         <li>曲の保存・管理（複数曲対応）</li>
+        <li>YouTubeリンクの保存・表示</li>
+        <li>曲データのJSON書き出し・取り込み</li>
+        <li>公式曲リストの表示</li>
         <li>A4サイズで印刷・PDF保存</li>
         <li>5種類のカラーテーマ</li>
       </ul>
@@ -2472,14 +2432,38 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
     </div>
 
     <div class="help-section">
+      <h3>🎵 onコード（分数コード）の書き方</h3>
+      <p>ベース音を指定するonコードは <code>/</code> で書きます。</p>
+      <div class="example">
+        [C/E]君の[Am/G]声が[F/A]聞こえる<br>
+        [G/B]風に[C]乗って
+      </div>
+      <p style="margin-top:6px;">移調時もベース音が自動で変わります。</p>
+    </div>
+
+    <div class="help-section">
       <h3>🎹 コードの入力補助</h3>
-      <p>編集画面の <code>コード</code> ボタンを押すとコード選択ポップアップが開きます。ルート音とコード種類を選んで <code>📋 コピー</code> を押すとクリップボードにコピーされます。</p>
-      <p style="margin-top:6px;">また、コードを選んだあと <code>挿入</code> ボタンを押すと、テキストエリアのカーソル位置に直接 <code>[Cm]</code> のような形で挿入できます。</p>
+      <p>編集画面の <code>コード</code> ボタンでコード選択ポップアップが開きます。ルート音・コード種類を選んで <code>📋 コピー</code> でクリップボードにコピー、または <code>挿入</code> ボタンでカーソル位置に直接挿入できます。</p>
+    </div>
+
+    <div class="help-section">
+      <h3>🎬 YouTubeリンク</h3>
+      <p>編集画面の <code>🎬 YouTube</code> 欄にURLを貼り付けると、プレビューにリンクが表示されます。タップするとYouTubeが開きます。リンクは曲と一緒に保存されます。</p>
     </div>
 
     <div class="help-section">
       <h3>📚 曲の保存・管理</h3>
-      <p>タイトル・作詞者・作曲者を入力して <code>💾 保存</code> ボタンで保存します。スマホでは編集画面上部のプルダウンから曲を選択・読み込みできます。<code>🗑</code> ボタンで削除も可能です。保存した曲はブラウザに記録されます。</p>
+      <p>タイトル・作詞者・作曲者を入力して <code>💾 保存</code> で保存します。スマホではプルダウンから曲を選択・読み込みできます。<code>🗑</code> ボタンで削除、<code>＋ 新規</code> で新しい曲を作れます。</p>
+    </div>
+
+    <div class="help-section">
+      <h3>🔼 書き出し・🔽 読み込み</h3>
+      <p><code>🔼 書出</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>🔽 読込</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。他の人と曲データを共有する時に便利です。</p>
+    </div>
+
+    <div class="help-section">
+      <h3>🎵 公式曲リスト</h3>
+      <p><code>🎵 公式曲</code> ボタンで管理者が公開した曲リストを表示します。曲をタップするとそのまま編集・プレビューができます。</p>
     </div>
 
     <div class="help-section">
@@ -2489,17 +2473,17 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 
     <div class="help-section">
       <h3>🔀 移調</h3>
-      <p>プレビュー上部の <code>−</code> <code>＋</code> ボタンで半音単位で移調できます。<code>↺</code> でリセット。移調した状態で保存することもできます。</p>
+      <p>プレビュー上部の <code>−</code> <code>＋</code> ボタンで半音単位で移調できます。<code>↺</code> でリセット。onコードのベース音も自動で移調されます。</p>
     </div>
 
     <div class="help-section">
       <h3>🖨 印刷・PDF保存</h3>
-      <p>プレビュー上部の <code>🖨 印刷</code> または <code>📄 PDF保存</code> ボタンでA4サイズに出力できます。コード図も含めて印刷されます。</p>
+      <p>プレビュー上部の <code>🖨 印刷</code> または <code>📄 PDF保存</code> ボタンでA4サイズに出力できます。コード図・タイトル・作詞作曲者も含めて印刷されます。</p>
     </div>
 
     <div class="help-section">
-      <h3>🌙 テーマ切り替え</h3>
-      <p>画面右上の <code>🌙 ダーク</code> / <code>☀️ ライト</code> ボタンで背景の明暗を切り替えられます。</p>
+      <h3>🎨 テーマ切り替え</h3>
+      <p>画面右上のプルダウンで <strong>ダーク・ライト・モノクロ・ロゼ・オーシャン</strong> の5種類から選べます。選んだテーマは次回も引き継がれます。</p>
     </div>
   </div>
 </div>
@@ -2507,27 +2491,6 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 <script>
 document.getElementById('helpBtn').addEventListener('click', () => {
   document.getElementById('helpOverlay').classList.add('open');
-});
-document.getElementById('helpPrintBtn').addEventListener('click', () => {
-  const modal = document.querySelector('.help-modal');
-  const printWin = window.open('', '_blank');
-  printWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
-<title>コード譜職人 使い方ガイド</title>
-<style>
-  body { font-family: 'Noto Sans JP', sans-serif; padding: 20px; color: #222; font-size: 13px; line-height: 1.8; }
-  h2 { font-size: 1.1rem; border-bottom: 2px solid #c8a050; padding-bottom: 6px; margin-bottom: 16px; }
-  h3 { font-size: 0.9rem; color: #7a5010; margin: 14px 0 4px; }
-  p { margin: 0 0 6px; }
-  code { background: #f5e8c0; padding: 1px 5px; border-radius: 3px; font-size: 0.85rem; }
-  ul { padding-left: 18px; margin: 4px 0; }
-  .example { background: #f5f0e0; padding: 8px 12px; border-radius: 6px; font-size: 0.82rem; margin: 6px 0; }
-  .no-print { display: none; }
-</style></head><body>
-${modal.innerHTML.replace(/<button[^>]*>.*?<\/button>/gs, '')}
-</body></html>`);
-  printWin.document.close();
-  printWin.focus();
-  setTimeout(() => { printWin.print(); printWin.close(); }, 400);
 });
 document.getElementById('helpClose').addEventListener('click', () => {
   document.getElementById('helpOverlay').classList.remove('open');
@@ -2548,7 +2511,7 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
     <div class="cp-suffix-grid" id="cpSuffixGrid"></div>
     <div style="border-top:1px solid var(--border);margin-top:10px;padding-top:10px;">
       <label style="font-size:0.72rem;color:var(--text-dim);display:flex;align-items:center;gap:6px;margin-bottom:6px;cursor:pointer;">
-        <input type="checkbox" id="cpOnCheck"> <span style="color:var(--accent-light);font-weight:700;">onコード</span>を使う
+        <input type="checkbox" id="cpOnCheck"> <span style="color:var(--accent-light);font-weight:700;">onコード</span>を使う（例：C/E）
       </label>
       <div id="cpOnSection" style="display:none;">
         <div class="cp-section-label">ベース音</div>
@@ -2566,40 +2529,52 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
 (function() {
   const ROOTS = ['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
   const SUFFIXES = [
-    { label: 'メジャー', val: '' },
-    { label: 'マイナー', val: 'm' },
-    { label: '7',        val: '7' },
-    { label: 'm7',       val: 'm7' },
-    { label: 'M7',       val: 'M7' },
-    { label: 'mM7',      val: 'mM7' },
-    { label: 'sus2',     val: 'sus2' },
-    { label: 'sus4',     val: 'sus4' },
-    { label: '7sus4',    val: '7sus4' },
-    { label: 'dim',      val: 'dim' },
-    { label: 'dim7',     val: 'dim7' },
-    { label: 'aug',      val: 'aug' },
-    { label: '6',        val: '6' },
-    { label: 'm6',       val: 'm6' },
-    { label: 'add9',     val: 'add9' },
-    { label: 'madd9',    val: 'madd9' },
-    { label: '9',        val: '9' },
-    { label: 'm9',       val: 'm9' },
-    { label: 'M9',       val: 'M9' },
-    { label: '11',       val: '11' },
-    { label: '13',       val: '13' },
-    { label: 'm7b5',     val: 'm7b5' },
-    { label: '7b9',      val: '7b9' },
-    { label: 'aug7',     val: 'aug7' },
+    { label: 'メジャー', val: '' },  { label: 'マイナー', val: 'm' },
+    { label: '7',        val: '7' },  { label: 'm7',       val: 'm7' },
+    { label: 'M7',       val: 'M7' }, { label: 'mM7',      val: 'mM7' },
+    { label: 'sus2',     val: 'sus2' },{ label: 'sus4',    val: 'sus4' },
+    { label: '7sus4',    val: '7sus4' },{ label: 'dim',    val: 'dim' },
+    { label: 'dim7',     val: 'dim7' },{ label: 'aug',     val: 'aug' },
+    { label: '6',        val: '6' },  { label: 'm6',       val: 'm6' },
+    { label: 'add9',     val: 'add9' },{ label: 'madd9',   val: 'madd9' },
+    { label: '9',        val: '9' },  { label: 'm9',       val: 'm9' },
+    { label: 'M9',       val: 'M9' }, { label: '11',       val: '11' },
+    { label: '13',       val: '13' }, { label: 'm7b5',     val: 'm7b5' },
+    { label: '7b9',      val: '7b9' },{ label: 'aug7',     val: 'aug7' },
   ];
 
   let selRoot = 'C', selSuffix = '', selBass = '', useOn = false;
 
+  function getChordText() {
+    const onPart = (useOn && selBass) ? '/' + selBass : '';
+    return '[' + selRoot + selSuffix + onPart + ']';
+  }
+
+  function updateAll() {
+    document.querySelectorAll('#cpRootGrid .cp-btn').forEach((b, i) => {
+      b.classList.toggle('selected', ROOTS[i] === selRoot);
+    });
+    document.querySelectorAll('#cpSuffixGrid .cp-btn').forEach((b, i) => {
+      b.classList.toggle('selected', SUFFIXES[i].val === selSuffix);
+    });
+    document.querySelectorAll('#cpBassGrid .cp-btn').forEach((b, i) => {
+      b.classList.toggle('selected', i === 0 ? !selBass : ROOTS[i-1] === selBass);
+    });
+    document.getElementById('cpPreview').textContent = getChordText();
+    const cb = document.getElementById('cpCopyBtn');
+    cb.textContent = '📋 コピー';
+    cb.classList.remove('copied');
+    // 挿入ボタン用フック
+    if (typeof window._cpUpdateHook === 'function') {
+      const onPart = (useOn && selBass) ? '/' + selBass : '';
+      window._cpUpdateHook(selRoot, selSuffix + onPart);
+    }
+  }
+
   function buildGrid() {
     const rg = document.getElementById('cpRootGrid');
     const sg = document.getElementById('cpSuffixGrid');
-    rg.innerHTML = '';
-    sg.innerHTML = '';
-
+    rg.innerHTML = ''; sg.innerHTML = '';
     ROOTS.forEach(r => {
       const b = document.createElement('button');
       b.className = 'cp-btn' + (r === selRoot ? ' selected' : '');
@@ -2607,7 +2582,6 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
       b.addEventListener('click', () => { selRoot = r; updateAll(); });
       rg.appendChild(b);
     });
-
     SUFFIXES.forEach(s => {
       const b = document.createElement('button');
       b.className = 'cp-btn' + (s.val === selSuffix ? ' selected' : '');
@@ -2617,190 +2591,95 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
     });
   }
 
-  function updateAll() {
-    // ボタンのselectedを更新
-    document.querySelectorAll('#cpRootGrid .cp-btn').forEach((b, i) => {
-      b.classList.toggle('selected', ROOTS[i] === selRoot);
-    });
-    document.querySelectorAll('#cpSuffixGrid .cp-btn').forEach((b, i) => {
-      b.classList.toggle('selected', SUFFIXES[i].val === selSuffix);
-    });
-    const onPart = (useOn && selBass) ? 'on' + selBass : '';
-    document.getElementById('cpPreview').textContent = '[' + selRoot + selSuffix + onPart + ']';
-    // コピーボタンをリセット
-    const cb = document.getElementById('cpCopyBtn');
-    cb.textContent = '📋 コピー';
-    cb.classList.remove('copied');
-    // インライン挿入ボタンに選択中コードを伝える
-    if (typeof window._cpUpdateHook === 'function') window._cpUpdateHook(selRoot, selSuffix + onPart);
-  }
-
   function buildBassGrid() {
     const bg = document.getElementById('cpBassGrid');
     bg.innerHTML = '';
-    // 「なし」ボタン
     const noneBtn = document.createElement('button');
     noneBtn.className = 'cp-btn' + (!selBass ? ' selected' : '');
     noneBtn.textContent = 'なし';
-    noneBtn.addEventListener('click', () => { selBass = ''; updateAll(); buildBassGrid(); });
+    noneBtn.addEventListener('click', () => { selBass = ''; updateAll(); });
     bg.appendChild(noneBtn);
     ROOTS.forEach(r => {
       const b = document.createElement('button');
       b.className = 'cp-btn' + (r === selBass ? ' selected' : '');
       b.textContent = r;
-      b.addEventListener('click', () => { selBass = r; updateAll(); buildBassGrid(); });
+      b.addEventListener('click', () => { selBass = r; updateAll(); });
       bg.appendChild(b);
     });
   }
 
   // コピーボタン
   document.getElementById('cpCopyBtn').addEventListener('click', () => {
-    const text = '[' + selRoot + selSuffix + ']';
-    navigator.clipboard.writeText(text).then(() => {
-      const cb = document.getElementById('cpCopyBtn');
-      cb.textContent = '✓ コピーしました！';
-      cb.classList.add('copied');
-        setTimeout(() => {
-        document.getElementById('chordPickerOverlay').classList.remove('open');
-      }, 800);
-    }).catch(() => {
-      // fallback
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select(); document.execCommand('copy');
-      document.body.removeChild(ta);
-      const cb = document.getElementById('cpCopyBtn');
+    const text = getChordText();
+    const cb = document.getElementById('cpCopyBtn');
+    const doShow = () => {
       cb.textContent = '✓ コピーしました！';
       cb.classList.add('copied');
       setTimeout(() => {
         document.getElementById('chordPickerOverlay').classList.remove('open');
       }, 800);
-    });
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(doShow).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); doShow();
+      });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta); doShow();
+    }
   });
 
-  // onチェックボックス
+  // onコードチェックボックス
   document.getElementById('cpOnCheck').addEventListener('change', function() {
     useOn = this.checked;
-    const section = document.getElementById('cpOnSection');
-    section.style.display = useOn ? '' : 'none';
-    if (useOn) buildBassGrid();
+    document.getElementById('cpOnSection').style.display = useOn ? '' : 'none';
+    if (useOn) { selBass = ''; buildBassGrid(); }
+    else { selBass = ''; }
     updateAll();
   });
 
-  // コードピッカーを開く関数を公開
-  window.openChordPicker = function() {
+  // 開閉
+  document.getElementById('chordPickBtn').addEventListener('click', () => {
     buildGrid();
     updateAll();
     document.getElementById('chordPickerOverlay').classList.add('open');
-  };
-
-  // 開閉
-  document.getElementById('chordPickBtn').addEventListener('click', window.openChordPicker);
+  });
   document.getElementById('cpClose').addEventListener('click', () => {
     document.getElementById('chordPickerOverlay').classList.remove('open');
   });
   document.getElementById('chordPickerOverlay').addEventListener('click', (e) => {
     if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
   });
+
+  window.openChordPicker = function() {
+    buildGrid(); updateAll();
+    document.getElementById('chordPickerOverlay').classList.add('open');
+  };
 })();
 </script>
 
-<!-- 公式曲モーダル -->
-<div class="official-overlay" id="officialOverlay">
-  <div class="official-modal">
-    <div class="official-header">
-      <span>🎵 公式曲リスト</span>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <button class="lib-export-btn" id="officialRefreshBtn">🔄</button>
-        <button class="official-close" id="officialClose">✕</button>
-      </div>
-    </div>
-    <div class="official-body" id="officialBody">
-      <div class="lib-empty">読み込み中...</div>
-    </div>
-  </div>
-</div>
-
-<style>
-.official-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:flex-end; justify-content:center; }
-.official-overlay.open { display:flex; }
-.official-modal { background:var(--panel); border-radius:16px 16px 0 0; width:100%; max-width:600px; max-height:80vh; display:flex; flex-direction:column; overflow:hidden; }
-.official-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border); font-size:0.88rem; font-weight:700; color:var(--accent-light); }
-.official-close { background:none; border:none; color:var(--text-dim); font-size:1rem; cursor:pointer; padding:4px; }
-.official-body { overflow-y:auto; flex:1; -webkit-overflow-scrolling:touch; }
-.lib-official-item { padding:10px 12px; border-bottom:1px solid var(--border); cursor:pointer; display:flex; align-items:center; gap:8px; }
-.lib-official-item:hover { background:var(--panel2); }
-.lib-official-badge { font-size:0.58rem; background:var(--accent-dim); color:var(--accent-light); border:1px solid var(--accent); border-radius:3px; padding:1px 4px; white-space:nowrap; flex-shrink:0; }
-</style>
-
 <script>
-// 公式曲モーダル
-const OFFICIAL_URL = 'https://tonciki-dev.github.io/cordfu3/songs.json';
-const OFFICIAL_CACHE_KEY = 'officialSongsCache';
-
-document.getElementById('officialClose').addEventListener('click', () => {
-  document.getElementById('officialOverlay').classList.remove('open');
-});
-document.getElementById('officialOverlay').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
-});
-document.getElementById('officialRefreshBtn').addEventListener('click', () => fetchOfficialSongs(true).then(renderOfficialModal));
-
-async function fetchOfficialSongs(forceRefresh=false) {
-  if (!forceRefresh) {
-    const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
-    if (cached) return;
-  }
-  try {
-    const res = await fetch(OFFICIAL_URL + '?t=' + Date.now());
-    if (!res.ok) throw new Error('取得失敗');
-    const data = await res.json();
-    const songs = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : []);
-    localStorage.setItem(OFFICIAL_CACHE_KEY, JSON.stringify(songs));
-  } catch(e) {
-    console.warn('公式曲取得失敗:', e);
-  }
-}
-
-async function renderOfficialModal() {
-  const body = document.getElementById('officialBody');
-  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
-  await fetchOfficialSongs();
-  const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
-  const songs = cached ? JSON.parse(cached) : [];
-  body.innerHTML = '';
-  if (!songs || songs.length === 0) {
-    body.innerHTML = '<div class="lib-empty">公式曲がありません</div>';
-    return;
-  }
-  songs.forEach(song => {
-    const item = document.createElement('div');
-    item.className = 'lib-official-item';
-    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
-    item.innerHTML = '<div style="flex:1;min-width:0;"><div class="lib-item-name">' + instIcon + ' ' + esc(song.title||'無題') + '</div><div class="lib-item-date">' + (song.lyricist?'作詞: '+esc(song.lyricist):'') + '</div></div><span class="lib-official-badge">公式</span>';
-    item.addEventListener('click', () => {
-      loadSongData(song);
-      document.getElementById('officialOverlay').classList.remove('open');
-    });
-    body.appendChild(item);
+window.addEventListener('load', function() {
+  var mobMap = {
+    'mobChordBtn':    function(){ document.getElementById('chordPickBtn').click(); },
+    'mobInsertBtn':   function(){ document.getElementById('chordInsertInlineBtn').click(); },
+    'mobNewBtn':      function(){ newSong(); },
+    'mobSaveBtn':     function(){ saveSong(); },
+    'mobExportBtn':   function(){ doExport(); },
+    'mobImportBtn':   function(){ document.getElementById('libImportFile').click(); },
+    'mobOfficialBtn': function(){ document.getElementById('officialOverlay').style.display='flex'; renderOfficialModal(); },
+    'mobHelpBtn':     function(){ document.getElementById('helpOverlay').classList.add('open'); }
+  };
+  Object.keys(mobMap).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('click', mobMap[id]);
   });
-}
-
-function loadSongData(song) {
-  document.getElementById('titleInput').value = song.title||'';
-  document.getElementById('lyricsInput').value = song.lyrics||'';
-  const lEl=document.getElementById('lyricistInput'); if(lEl) lEl.value=song.lyricist||'';
-  const cEl=document.getElementById('composerInput'); if(cEl) cEl.value=song.composer||'';
-  const yEl=document.getElementById('youtubeInput');  if(yEl) yEl.value=song.youtube||'';
-  if(song.instrument) setInstrument(song.instrument);
-  transpose = song.transpose||0;
-  document.getElementById('transpVal').textContent = transpose===0?'±0':(transpose>0?'+':'')+transpose;
-  currentSongId = null;
-  render(); renderLibrary();
-  if(window.innerWidth<=900 && typeof switchMobTab==='function') switchMobTab('preview');
-}
+});
 </script>
 
 <script>
@@ -2812,5 +2691,134 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<!-- 公式曲モーダル -->
+<div id="officialOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;align-items:flex-end;justify-content:center;">
+  <div style="background:var(--panel);border-radius:16px 16px 0 0;width:100%;max-width:600px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);">
+      <span style="font-size:0.88rem;font-weight:700;color:var(--accent-light);">🎵 公式曲リスト</span>
+      <div style="display:flex;gap:6px;">
+        <button id="officialRefreshBtn" style="background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:4px;padding:2px 8px;cursor:pointer;">🔄</button>
+        <button id="officialCloseBtn" style="background:none;border:none;color:var(--text-dim);font-size:1rem;cursor:pointer;padding:4px;">✕</button>
+      </div>
+    </div>
+    <div id="officialBody" style="overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;">
+      <div class="lib-empty">読み込み中...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── JSON エクスポート（グローバル） ──
+function doExport() {
+  const songs = loadSongs();
+  if (!songs.length) { alert('保存された曲がありません。'); return; }
+  const data = { app:'コード譜職人', version:1, exportedAt:new Date().toISOString(), songs };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download='コード譜職人_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+const OFFICIAL_URL = 'https://tonciki-dev.github.io/cordfu3/songs.json';
+const OFFICIAL_CACHE_KEY = 'officialSongsCache';
+
+async function fetchOfficialSongs() {
+  const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
+  if (cached) return JSON.parse(cached);
+  try {
+    const res = await fetch(OFFICIAL_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('取得失敗');
+    const data = await res.json();
+    const songs = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : []);
+    localStorage.setItem(OFFICIAL_CACHE_KEY, JSON.stringify(songs));
+    return songs;
+  } catch(e) { return []; }
+}
+
+async function renderOfficialModal() {
+  const body = document.getElementById('officialBody');
+  if (!body) return;
+  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
+  const songs = await fetchOfficialSongs();
+  body.innerHTML = '';
+  if (!songs.length) { body.innerHTML = '<div class="lib-empty">公式曲がありません</div>'; return; }
+  songs.forEach(song => {
+    const item = document.createElement('div');
+    item.className = 'lib-item';
+    item.style.cursor = 'pointer';
+    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
+    item.innerHTML = '<div style="flex:1;min-width:0;"><div class="lib-item-name">'+instIcon+' '+esc(song.title||'無題')+'</div><div class="lib-item-date">'+(song.lyricist?'作詞: '+esc(song.lyricist):'')+'</div></div><span style="font-size:0.6rem;background:var(--accent-dim);color:var(--accent-light);border:1px solid var(--accent);border-radius:3px;padding:1px 4px;flex-shrink:0;">公式</span>';
+    item.addEventListener('click', () => {
+      document.getElementById('titleInput').value = song.title||'';
+      document.getElementById('lyricsInput').value = song.lyrics||'';
+      const lEl=document.getElementById('lyricistInput');if(lEl)lEl.value=song.lyricist||'';
+      const cEl=document.getElementById('composerInput');if(cEl)cEl.value=song.composer||'';
+      const yEl=document.getElementById('youtubeInput');if(yEl)yEl.value=song.youtube||'';
+      if(song.instrument && typeof setInstrument==='function')setInstrument(song.instrument);
+      if(typeof transpose!=='undefined'){transpose=song.transpose||0;document.getElementById('transpVal').textContent=transpose===0?'±0':(transpose>0?'+':'')+transpose;}
+      currentSongId=null; render(); renderLibrary();
+      document.getElementById('officialOverlay').style.display='none';
+      if(window.innerWidth<=900&&typeof switchMobTab==='function')switchMobTab('preview');
+    });
+    body.appendChild(item);
+  });
+}
+
+// イベント登録はDOM読み込み後
+window.addEventListener('load', function() {
+  // 書出・読込
+  var expBtn = document.getElementById('libExportBtn');
+  if(expBtn) expBtn.addEventListener('click', doExport);
+
+  var impBtn = document.getElementById('libImportBtn');
+  if(impBtn) impBtn.addEventListener('click', function(){ document.getElementById('libImportFile').click(); });
+
+  var impFile = document.getElementById('libImportFile');
+  if(impFile) impFile.addEventListener('change', function() {
+    if (!this.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        const imported = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : null);
+        if (!imported) { alert('対応していない形式のファイルです。'); return; }
+        const existing = loadSongs();
+        const existingIds = new Set(existing.map(function(s){return s.id;}));
+        const toAdd = imported.map(function(s){ return existingIds.has(s.id) ? Object.assign({},s,{id:genId(),createdAt:Date.now(),updatedAt:Date.now()}) : s; });
+        saveSongs(toAdd.concat(existing));
+        renderLibrary();
+        alert(toAdd.length + '曲を取り込みました！');
+      } catch(err) { alert('読み込みに失敗: ' + err.message); }
+    };
+    reader.readAsText(this.files[0], 'utf-8');
+    this.value = '';
+  });
+
+  // 公式曲
+  var offBtn = document.getElementById('libOfficialBtn');
+  if(offBtn) offBtn.addEventListener('click', function(){
+    document.getElementById('officialOverlay').style.display='flex';
+    renderOfficialModal();
+  });
+
+  var offClose = document.getElementById('officialCloseBtn');
+  if(offClose) offClose.addEventListener('click', function(){
+    document.getElementById('officialOverlay').style.display='none';
+  });
+
+  var offRefresh = document.getElementById('officialRefreshBtn');
+  if(offRefresh) offRefresh.addEventListener('click', function(){
+    localStorage.removeItem(OFFICIAL_CACHE_KEY);
+    renderOfficialModal();
+  });
+
+  var offOverlay = document.getElementById('officialOverlay');
+  if(offOverlay) offOverlay.addEventListener('click', function(e){
+    if(e.target===e.currentTarget) e.currentTarget.style.display='none';
+  });
+});
+</script>
+
 </body>
 </html>
