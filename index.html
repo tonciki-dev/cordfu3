@@ -183,6 +183,48 @@ header {
   background: var(--panel2);
   overflow: hidden;
 }
+.lib-tabs {
+  display: flex;
+  width: 100%;
+}
+.lib-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.78rem;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lib-tab.active {
+  color: var(--accent-light);
+  border-bottom-color: var(--accent);
+  background: rgba(212,160,68,0.07);
+  font-weight: 700;
+}
+.lib-official-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lib-official-item:hover { background: var(--panel2); }
+.lib-official-badge {
+  font-size: 0.58rem;
+  background: var(--accent-dim);
+  color: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 1px 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 .lib-bar {
   padding: 7px 10px;
   font-size: 0.67rem;
@@ -258,6 +300,41 @@ header {
   color: var(--text-dim);
   margin-top: 1px;
 }
+.lib-check {
+  width: 16px; height: 16px;
+  cursor: pointer;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.lib-item-check-area {
+  display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0;
+}
+.lib-select-bar {
+  display: none;
+  padding: 5px 10px;
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+.lib-select-bar.visible { display: flex; }
+.lib-select-export-btn {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  color: var(--accent-light);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-weight: 700;
+  margin-left: auto;
+}
+.lib-select-export-btn:hover { background: var(--accent); color: #fff; }
 .lib-empty {
   padding: 20px 12px;
   font-size: 0.72rem;
@@ -786,16 +863,38 @@ textarea::placeholder { color: var(--text-dim); }
   <!-- ── Song library ── -->
   <div class="library-panel">
     <div class="lib-bar">
-      <span>📚 曲リスト</span>
-      <div style="display:flex;gap:4px;">
-        <button class="lib-export-btn" id="libExportBtn" title="JSONで書き出し">📤</button>
-        <button class="lib-export-btn" id="libImportBtn" title="JSONを取り込む">📥</button>
-        <input type="file" id="libImportFile" accept=".json" style="display:none;">
-        <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
+      <div class="lib-tabs">
+        <button class="lib-tab active" id="libTabMy">📚 マイ曲</button>
+        <button class="lib-tab" id="libTabOfficial">🎵 公式曲</button>
       </div>
     </div>
-    <div class="lib-list" id="libList">
-      <div class="lib-empty" id="libEmpty">保存した曲が<br>ここに表示されます</div>
+    <!-- マイ曲セクション -->
+    <div id="libMySection">
+      <div class="lib-bar" style="border-top:none;padding-top:4px;">
+        <div style="display:flex;gap:4px;margin-left:auto;">
+          <button class="lib-export-btn" id="libExportBtn" title="JSONで書き出し">🔼 書出</button>
+          <button class="lib-export-btn" id="libImportBtn" title="JSONを取り込む">🔽 読込</button>
+          <input type="file" id="libImportFile" accept=".json" style="display:none;">
+          <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
+        </div>
+      </div>
+      <div class="lib-select-bar" id="libSelectBar">
+        <span id="libSelectCount">0曲選択中</span>
+        <button class="lib-select-export-btn" id="libSelectExportBtn">🔼 選択曲を書出</button>
+      </div>
+      <div class="lib-list" id="libList">
+        <div class="lib-empty" id="libEmpty">保存した曲が<br>ここに表示されます</div>
+      </div>
+    </div>
+    <!-- 公式曲セクション -->
+    <div id="libOfficialSection" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div class="lib-bar" style="border-top:none;padding-top:4px;">
+        <span style="font-size:0.7rem;color:var(--text-dim);">管理者が公開した曲リスト</span>
+        <button class="lib-export-btn" id="libOfficialRefreshBtn" title="最新データを取得" style="margin-left:auto;">🔄</button>
+      </div>
+      <div class="lib-list" id="libOfficialList">
+        <div class="lib-empty" id="libOfficialEmpty">読み込み中...</div>
+      </div>
     </div>
   </div>
 
@@ -805,6 +904,7 @@ textarea::placeholder { color: var(--text-dim); }
       <select class="mob-song-select" id="mobSongSelect"><option value="">— 曲を選択 —</option></select>
       <button class="lib-new-btn" id="libNewBtnMob">＋ 新規</button>
       <button class="mob-del-btn" id="mobDelBtn" title="選択中の曲を削除">🗑</button>
+      <button class="mob-official-btn" id="mobOfficialBtn" title="公式曲">🎵</button>
     </div>
     <div class="mob-tool-bar">
       <span id="charCountMob" style="font-size:0.64rem;color:var(--text-dim);">0 文字</span>
@@ -813,8 +913,8 @@ textarea::placeholder { color: var(--text-dim); }
       <span class="panel-divider"></span>
       <button class="lib-new-btn" id="mobToolNewBtn">＋ 新規</button>
       <button class="lib-save-btn" id="mobToolSaveBtn">💾 保存</button>
-      <button class="lib-export-btn" id="mobToolExportBtn" title="JSONで書き出し">📤</button>
-      <button class="lib-export-btn" id="mobToolImportBtn" title="JSONを取り込む">📥</button>
+      <button class="lib-export-btn" id="mobToolExportBtn" title="JSONで書き出し">🔼 書出</button>
+      <button class="lib-export-btn" id="mobToolImportBtn" title="JSONを取り込む">🔽 読込</button>
       <button class="help-btn" id="mobToolHelpBtn">説明</button>
     </div>
     <div class="panel-bar">
@@ -2010,13 +2110,17 @@ function renderLibrary() {
     const dateStr = song.updatedAt ? new Date(song.updatedAt).toLocaleDateString('ja-JP',{month:'short',day:'numeric'}) : '';
 
     item.innerHTML = `
-      <div style="flex:1;min-width:0;">
-        <div class="lib-item-name" title="${esc(song.title || '無題')}">${instIcon} ${esc(song.title || '無題')}</div>
-        <div class="lib-item-date">${dateStr}</div>
+      <input type="checkbox" class="lib-check" data-id="${song.id}">
+      <div class="lib-item-check-area">
+        <div style="flex:1;min-width:0;">
+          <div class="lib-item-name" title="${esc(song.title || '無題')}">${instIcon} ${esc(song.title || '無題')}</div>
+          <div class="lib-item-date">${dateStr}</div>
+        </div>
+        <button class="lib-item-del" data-id="${song.id}" title="削除">✕</button>
       </div>
-      <button class="lib-item-del" data-id="${song.id}" title="削除">✕</button>
     `;
     item.querySelector('.lib-item-name').addEventListener('click', () => loadSong(song.id));
+    item.querySelector('.lib-check').addEventListener('change', updateSelectBar);
     item.querySelector('.lib-item-del').addEventListener('click', (e) => {
       e.stopPropagation();
       if (confirm(`「${song.title || '無題'}」を本当に削除してもよろしいですか？\nこの操作は元に戻せません。`)) deleteSong(song.id);
@@ -2175,6 +2279,140 @@ document.getElementById('libImportFile').addEventListener('change', function() {
   if (this.files[0]) { doImport(this.files[0]); this.value = ''; }
 });
 
+// 選択バー更新
+function updateSelectBar() {
+  const checked = document.querySelectorAll('.lib-check:checked');
+  const bar = document.getElementById('libSelectBar');
+  const count = document.getElementById('libSelectCount');
+  if (checked.length > 0) {
+    bar.classList.add('visible');
+    count.textContent = checked.length + '曲選択中';
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+// 選択曲を書き出し
+document.getElementById('libSelectExportBtn').addEventListener('click', () => {
+  const checked = document.querySelectorAll('.lib-check:checked');
+  if (checked.length === 0) { alert('曲を選択してください。'); return; }
+  const ids = Array.from(checked).map(el => el.dataset.id);
+  const songs = loadSongs().filter(s => ids.includes(s.id));
+  const data = { app: 'コード譜職人', version: 1, exportedAt: new Date().toISOString(), songs };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'コード譜職人_選択曲_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  // チェックを外す
+  checked.forEach(el => { el.checked = false; });
+  updateSelectBar();
+});
+
+// ── ライブラリタブ切り替え ──
+let currentLibTab = 'my';
+function switchLibTab(tab) {
+  currentLibTab = tab;
+  document.getElementById('libTabMy').classList.toggle('active', tab === 'my');
+  document.getElementById('libTabOfficial').classList.toggle('active', tab === 'official');
+  document.getElementById('libMySection').style.display = tab === 'my' ? '' : 'none';
+  document.getElementById('libOfficialSection').style.display = tab === 'official' ? 'flex' : 'none';
+  if (tab === 'official') fetchOfficialSongs();
+}
+document.getElementById('libTabMy').addEventListener('click', () => switchLibTab('my'));
+document.getElementById('libTabOfficial').addEventListener('click', () => switchLibTab('official'));
+document.getElementById('libOfficialRefreshBtn').addEventListener('click', () => fetchOfficialSongs(true));
+
+// ── 公式曲リスト取得 ──
+const OFFICIAL_URL = 'https://tonciki-dev.github.io/chord-viewer/songs.json';
+const OFFICIAL_CACHE_KEY = 'officialSongsCache';
+
+async function fetchOfficialSongs(forceRefresh = false) {
+  const listEl  = document.getElementById('libOfficialList');
+  const emptyEl = document.getElementById('libOfficialEmpty');
+
+  // キャッシュを先に表示
+  if (!forceRefresh) {
+    const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
+    if (cached) {
+      renderOfficialList(JSON.parse(cached));
+      return;
+    }
+  }
+
+  emptyEl.textContent = '読み込み中...';
+  emptyEl.style.display = '';
+  listEl.querySelectorAll('.lib-official-item').forEach(el => el.remove());
+
+  try {
+    const res = await fetch(OFFICIAL_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('取得失敗');
+    const data = await res.json();
+    const songs = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : []);
+    localStorage.setItem(OFFICIAL_CACHE_KEY, JSON.stringify(songs));
+    renderOfficialList(songs);
+  } catch(e) {
+    // キャッシュがあればそれを表示
+    const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
+    if (cached) {
+      renderOfficialList(JSON.parse(cached));
+    } else {
+      emptyEl.textContent = '公式曲リストがありません';
+    }
+  }
+}
+
+function renderOfficialList(songs) {
+  const listEl  = document.getElementById('libOfficialList');
+  const emptyEl = document.getElementById('libOfficialEmpty');
+  listEl.querySelectorAll('.lib-official-item').forEach(el => el.remove());
+
+  if (!songs || songs.length === 0) {
+    emptyEl.textContent = '公式曲がありません';
+    emptyEl.style.display = '';
+    return;
+  }
+  emptyEl.style.display = 'none';
+
+  songs.forEach(song => {
+    const item = document.createElement('div');
+    item.className = 'lib-official-item';
+    const inst = song.instrument || 'ukulele';
+    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[inst] || '🎵';
+    item.innerHTML = `
+      <div style="flex:1;min-width:0;">
+        <div class="lib-item-name" title="${esc(song.title||'無題')}">${instIcon} ${esc(song.title||'無題')}</div>
+        <div class="lib-item-date">${song.lyricist ? '作詞: '+esc(song.lyricist) : ''}</div>
+      </div>
+      <span class="lib-official-badge">公式</span>
+    `;
+    // クリックで読み込み（マイ曲タブに切り替えて表示）
+    item.addEventListener('click', () => {
+      loadSongData(song);
+      switchLibTab('my');
+    });
+    listEl.appendChild(item);
+  });
+}
+
+// 曲データを直接読み込む（IDなし）
+function loadSongData(song) {
+  document.getElementById('titleInput').value    = song.title    || '';
+  document.getElementById('lyricsInput').value   = song.lyrics   || '';
+  const lEl = document.getElementById('lyricistInput'); if(lEl) lEl.value = song.lyricist || '';
+  const cEl = document.getElementById('composerInput'); if(cEl) cEl.value = song.composer || '';
+  const yEl = document.getElementById('youtubeInput');  if(yEl) yEl.value = song.youtube  || '';
+  if (song.instrument) setInstrument(song.instrument);
+  transpose = song.transpose || 0;
+  document.getElementById('transpVal').textContent = transpose === 0 ? '±0' : (transpose > 0 ? '+' : '') + transpose;
+  currentSongId = null;
+  render();
+  renderLibrary();
+  if (window.innerWidth <= 700 && typeof switchMobTab === 'function') switchMobTab('preview');
+}
+
 document.getElementById('libSaveBtn').addEventListener('click', saveSong);
 document.getElementById('libNewBtn').addEventListener('click', newSong);
 ['lyricsInput','titleInput','lyricistInput','composerInput','youtubeInput'].forEach(id => {
@@ -2189,6 +2427,52 @@ document.getElementById('libNewBtn').addEventListener('click', newSong);
 });
 const lnb = document.getElementById('libNewBtnMob'); if (lnb) lnb.addEventListener('click', newSong);
 const mss = document.getElementById('mobSongSelect'); if (mss) mss.addEventListener('change', function() { if (this.value) loadSong(this.value); });
+
+// 公式曲モーダル（スマホ用）
+document.getElementById('mobOfficialBtn').addEventListener('click', () => {
+  document.getElementById('officialOverlay').classList.add('open');
+  renderOfficialModal();
+});
+document.getElementById('officialClose').addEventListener('click', () => {
+  document.getElementById('officialOverlay').classList.remove('open');
+});
+document.getElementById('officialOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
+document.getElementById('officialRefreshBtn').addEventListener('click', () => {
+  fetchOfficialSongs(true).then(renderOfficialModal);
+});
+
+async function renderOfficialModal() {
+  const body = document.getElementById('officialBody');
+  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
+  await fetchOfficialSongs();
+  const cached = localStorage.getItem(OFFICIAL_CACHE_KEY);
+  const songs = cached ? JSON.parse(cached) : [];
+  body.innerHTML = '';
+  if (!songs || songs.length === 0) {
+    body.innerHTML = '<div class="lib-empty">公式曲がありません</div>';
+    return;
+  }
+  songs.forEach(song => {
+    const item = document.createElement('div');
+    item.className = 'lib-official-item';
+    const inst = song.instrument || 'ukulele';
+    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[inst] || '🎵';
+    item.innerHTML = `
+      <div style="flex:1;min-width:0;">
+        <div class="lib-item-name">${instIcon} ${esc(song.title||'無題')}</div>
+        <div class="lib-item-date">${song.lyricist ? '作詞: '+esc(song.lyricist) : ''}</div>
+      </div>
+      <span class="lib-official-badge">公式</span>
+    `;
+    item.addEventListener('click', () => {
+      loadSongData(song);
+      document.getElementById('officialOverlay').classList.remove('open');
+    });
+    body.appendChild(item);
+  });
+}
 
 // mob-tool-barボタンのイベント（全てadEventListenerで設定）
 (function() {
@@ -2530,7 +2814,8 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 
     <div class="help-section">
       <h3>📤 曲データの書き出し・取り込み</h3>
-      <p><code>📤</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>📥</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。他の人と曲データを共有するときに便利です。</p>
+      <p><code>🔼 書出</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>🔽 読込</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。他の人と曲データを共有するときに便利です。</p>
+      <p style="margin-top:6px;">曲リストの各曲の左にある☑️チェックボックスで曲を選び、<code>🔼 選択曲を書出</code> ボタンを押すと、選んだ曲だけのJSONを書き出せます。管理者に申請する時などに使ってください。</p>
     </div>
 
     <div class="help-section">
@@ -2757,6 +3042,51 @@ document.getElementById('helpOverlay').addEventListener('click', (e) => {
   });
 })();
 </script>
+
+<!-- 公式曲モーダル（スマホ用ボトムシート） -->
+<div class="official-overlay" id="officialOverlay">
+  <div class="official-modal">
+    <div class="official-header">
+      <span>🎵 公式曲リスト</span>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <button class="lib-export-btn" id="officialRefreshBtn">🔄</button>
+        <button class="official-close" id="officialClose">✕</button>
+      </div>
+    </div>
+    <div class="official-body" id="officialBody">
+      <div class="lib-empty">読み込み中...</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.official-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6); z-index: 300;
+  align-items: flex-end; justify-content: center;
+}
+.official-overlay.open { display: flex; }
+.official-modal {
+  background: var(--panel); border-radius: 16px 16px 0 0;
+  width: 100%; max-width: 600px; max-height: 80vh;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.official-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  font-size: 0.88rem; font-weight: 700; color: var(--accent-light);
+}
+.official-close {
+  background: none; border: none; color: var(--text-dim);
+  font-size: 1rem; cursor: pointer; padding: 4px;
+}
+.official-body { overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch; }
+.mob-official-btn {
+  background: var(--accent-dim); border: 1px solid var(--accent);
+  color: var(--accent-light); border-radius: 4px;
+  padding: 3px 7px; font-size: 0.8rem; cursor: pointer; flex-shrink: 0;
+}
+</style>
 
 <script>
 if ('serviceWorker' in navigator) {
