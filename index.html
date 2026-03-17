@@ -320,9 +320,9 @@ header {
 .help-btn:hover { border-color: var(--accent); color: var(--accent-light); }
 .help-btn-red {
   background:rgba(200,40,40,0.12);border:2px solid #cc3333;color:#ff6666;
-  border-radius:6px;padding:2px 8px;font-size:0.72rem;font-family:'Noto Sans JP',sans-serif;
-  cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;font-weight:700;
+  border-radius:6px;padding:2px 10px;font-size:0.72rem;font-family:'Noto Sans JP',sans-serif;
+  cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-weight:700;white-space:nowrap;writing-mode:horizontal-tb;
 }
 .help-btn-red:hover{background:#cc3333;color:#fff;}
 .chord-pick-btn {
@@ -481,10 +481,10 @@ header {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 24px 26px 20px;
-  max-width: 480px;
-  width: calc(100% - 32px);
-  max-height: 80vh;
+  padding: 20px 22px 20px;
+  max-width: 520px;
+  width: calc(100% - 24px);
+  max-height: 85vh;
   overflow-y: auto;
   position: relative;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
@@ -827,11 +827,13 @@ textarea::placeholder { color: var(--text-dim); }
   <div class="library-panel">
     <div class="lib-bar">
       <span>📚 マイ曲</span>
-      <div style="display:flex;gap:4px;">
-        <button class="lib-export-btn" id="libExportBtn" title="JSONで書き出し">🔼 書出</button>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="lib-export-btn" id="libExportBtn" title="全曲をJSONで書き出し">🔼 全書出</button>
+        <button class="lib-export-btn" id="libExportSelBtn" title="選択した曲を書き出し" style="display:none;">☑ 選択書出</button>
         <button class="lib-export-btn" id="libImportBtn" title="JSONを取り込む">🔽 読込</button>
         <input type="file" id="libImportFile" accept=".json" style="display:none;">
         <button class="lib-export-btn" id="libOfficialBtn" title="公式曲リスト">🎵 公式曲</button>
+        <button class="lib-export-btn" id="libSelectModeBtn" title="選択モード">☑ 選択</button>
         <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
       </div>
     </div>
@@ -2009,6 +2011,7 @@ function renderLibrary() {
     const dateStr = song.updatedAt ? new Date(song.updatedAt).toLocaleDateString('ja-JP',{month:'short',day:'numeric'}) : '';
 
     item.innerHTML = `
+      <input type="checkbox" class="lib-item-check" data-id="${song.id}" style="display:none;margin-right:6px;flex-shrink:0;width:16px;height:16px;cursor:pointer;">
       <div style="flex:1;min-width:0;">
         <div class="lib-item-name" title="${esc(song.title || '無題')}">${instIcon} ${esc(song.title || '無題')}</div>
         <div class="lib-item-date">${dateStr}</div>
@@ -2402,11 +2405,11 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 <!-- Help Modal -->
 <div class="help-overlay" id="helpOverlay">
   <div class="help-modal">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <h2 style="margin:0;">📖 使い方ガイド</h2>
-      <div style="display:flex;gap:6px;">
-        <button id="helpPrintBtn" style="background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:4px;padding:3px 10px;font-size:0.72rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;">🖨 印刷</button>
-        <button class="help-close" id="helpClose">✕</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:8px;flex-wrap:nowrap;">
+      <h2 style="margin:0;font-size:0.95rem;white-space:nowrap;">📖 使い方ガイド</h2>
+      <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+        <button id="helpPrintBtn" style="background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:4px;padding:4px 12px;font-size:0.72rem;font-family:'Noto Sans JP',sans-serif;cursor:pointer;white-space:nowrap;">🖨 印刷</button>
+        <button class="help-close" id="helpClose" style="flex-shrink:0;">✕</button>
       </div>
     </div>
 
@@ -2788,6 +2791,42 @@ async function renderOfficialModal() {
   });
 }
 
+// 選択書出
+function doExportSelected() {
+  const checked = document.querySelectorAll('.lib-item-check:checked');
+  if (!checked.length) { alert('曲を選択してください。'); return; }
+  const songs = loadSongs();
+  const ids = new Set([...checked].map(el => el.dataset.id));
+  const selected = songs.filter(s => ids.has(s.id));
+  const data = { app:'コード譜職人', version:1, exportedAt:new Date().toISOString(), songs:selected };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download='コード譜職人_選択_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+let selectMode = false;
+function toggleSelectMode() {
+  selectMode = !selectMode;
+  const btn = document.getElementById('libSelectModeBtn');
+  const selBtn = document.getElementById('libExportSelBtn');
+  const checks = document.querySelectorAll('.lib-item-check');
+  if (selectMode) {
+    btn.textContent = '✕ 選択解除';
+    btn.style.color = 'var(--accent-light)';
+    btn.style.borderColor = 'var(--accent)';
+    selBtn.style.display = '';
+    checks.forEach(el => { el.style.display = ''; el.checked = false; });
+  } else {
+    btn.textContent = '☑ 選択';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+    selBtn.style.display = 'none';
+    checks.forEach(el => { el.style.display = 'none'; el.checked = false; });
+  }
+}
+
 // イベント登録はDOM読み込み後
 window.addEventListener('load', function() {
   // 書出・読込
@@ -2819,6 +2858,12 @@ window.addEventListener('load', function() {
   });
 
   // 公式曲
+  var selModeBtn = document.getElementById('libSelectModeBtn');
+  if(selModeBtn) selModeBtn.addEventListener('click', toggleSelectMode);
+
+  var expSelBtn = document.getElementById('libExportSelBtn');
+  if(expSelBtn) expSelBtn.addEventListener('click', doExportSelected);
+
   var offBtn = document.getElementById('libOfficialBtn');
   if(offBtn) offBtn.addEventListener('click', function(){
     document.getElementById('officialOverlay').style.display='flex';
