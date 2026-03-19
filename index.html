@@ -856,7 +856,8 @@ textarea::placeholder { color: var(--text-dim); }
       <span class="panel-divider"></span>
       <button class="lib-new-btn" id="mobNewBtn">＋ 新規</button>
       <button class="lib-save-btn" id="mobSaveBtn">💾 保存</button>
-      <button class="lib-export-btn" id="mobExportBtn">🔼 書出</button>
+      <button class="lib-export-btn" id="mobExportBtn">🔼 全書出</button>
+      <button class="lib-export-btn" id="mobExportSelBtn2">☑ 選択書出</button>
       <button class="lib-export-btn" id="mobImportBtn">🔽 読込</button>
       <button class="lib-export-btn" id="mobOfficialBtn">🎵 公式</button>
       <button class="help-btn help-btn-red" id="mobHelpBtn">説明</button>
@@ -883,6 +884,10 @@ textarea::placeholder { color: var(--text-dim); }
     <div class="title-row" style="gap:10px;">
       <span class="title-label" style="white-space:nowrap;">🎬 YouTube</span>
       <input class="title-input" id="youtubeInput" type="url" placeholder="https://youtu.be/..." style="font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;">
+    </div>
+    <div class="title-row" style="gap:10px;">
+      <span class="title-label" style="white-space:nowrap;">🎤 アーティスト</span>
+      <input class="title-input" id="artistInput" type="text" placeholder="アーティスト名..." style="font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;">
     </div>
     <textarea id="lyricsInput" placeholder="歌詞を入力..."></textarea>
   </div>
@@ -1827,6 +1832,8 @@ function render() {
   const lyricist = (document.getElementById('lyricistInput')||{value:''}).value.trim();
   const composer = (document.getElementById('composerInput')||{value:''}).value.trim();
   const youtube  = (document.getElementById('youtubeInput')||{value:''}).value.trim();
+  const artist   = (document.getElementById('artistInput')||{value:''}).value.trim();
+  if (artist)   metaParts.push('🎤 ' + artist);
   if (lyricist) metaParts.push('作詞: ' + lyricist);
   if (composer) metaParts.push('作曲: ' + composer);
   const ytEl=document.getElementById('printYoutube');
@@ -2014,7 +2021,7 @@ function renderLibrary() {
       <input type="checkbox" class="lib-item-check" data-id="${song.id}" style="display:none;margin-right:6px;flex-shrink:0;width:16px;height:16px;cursor:pointer;">
       <div style="flex:1;min-width:0;">
         <div class="lib-item-name" title="${esc(song.title || '無題')}">${instIcon} ${esc(song.title || '無題')}</div>
-        <div class="lib-item-date">${dateStr}</div>
+        <div class="lib-item-date">${song.artist ? '🎤 '+esc(song.artist)+' / ' : ''}${dateStr}</div>
       </div>
       <button class="lib-item-del" data-id="${song.id}" title="削除">✕</button>
     `;
@@ -2044,19 +2051,20 @@ function saveSong() {
   const lyricist = (document.getElementById('lyricistInput')||{value:''}).value.trim();
   const composer = (document.getElementById('composerInput')||{value:''}).value.trim();
   const youtube  = (document.getElementById('youtubeInput')||{value:''}).value.trim();
+  const artist   = (document.getElementById('artistInput')||{value:''}).value.trim();
   const songs    = loadSongs();
 
   if (currentSongId) {
     const idx = songs.findIndex(s => s.id === currentSongId);
     if (idx >= 0) {
-      songs[idx] = { ...songs[idx], title, lyrics, lyricist, composer, youtube, instrument: INSTRUMENT, transpose, updatedAt: Date.now() };
+      songs[idx] = { ...songs[idx], title, lyrics, lyricist, composer, youtube, artist, instrument: INSTRUMENT, transpose, updatedAt: Date.now() };
       saveSongs(songs);
       renderLibrary();
       flashSaved();
       return;
     }
   }
-  const song = { id: genId(), title, lyrics, lyricist, composer, youtube, instrument: INSTRUMENT, transpose, createdAt: Date.now(), updatedAt: Date.now() };
+  const song = { id: genId(), title, lyrics, lyricist, composer, youtube, artist, instrument: INSTRUMENT, transpose, createdAt: Date.now(), updatedAt: Date.now() };
   songs.unshift(song);
   saveSongs(songs);
   currentSongId = song.id;
@@ -2073,6 +2081,7 @@ function loadSong(id) {
   document.getElementById('lyricsInput').value = song.lyrics   || '';
   const lEl = document.getElementById('lyricistInput'); if (lEl) lEl.value = song.lyricist || '';
   const yEl = document.getElementById('youtubeInput'); if (yEl) yEl.value = song.youtube || '';
+  const aEl = document.getElementById('artistInput'); if (aEl) aEl.value = song.artist || '';
   const cEl = document.getElementById('composerInput'); if (cEl) cEl.value = song.composer || '';
   if (song.instrument) {
     INSTRUMENT = song.instrument;
@@ -2110,6 +2119,7 @@ function newSong() {
   document.getElementById('lyricsInput').value = '';
   const lN = document.getElementById('lyricistInput'); if (lN) lN.value = '';
   const yN = document.getElementById('youtubeInput'); if (yN) yN.value = '';
+  const aN = document.getElementById('artistInput'); if (aN) aN.value = '';
   const cN = document.getElementById('composerInput'); if (cN) cN.value = '';
   transpose = 0;
   document.getElementById('transpVal').textContent = '±0';
@@ -2727,6 +2737,9 @@ if ('serviceWorker' in navigator) {
         <button id="officialCloseBtn" style="background:none;border:none;color:var(--text-dim);font-size:1rem;cursor:pointer;padding:4px;">✕</button>
       </div>
     </div>
+    <div style="padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;">
+      <input id="officialSearchInput" type="text" placeholder="🔍 曲名・アーティスト名で検索..." style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:0.82rem;font-family:'Noto Sans JP',sans-serif;color:var(--text);outline:none;">
+    </div>
     <div id="officialBody" style="overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;">
       <div class="lib-empty">読み込み中...</div>
     </div>
@@ -2762,25 +2775,27 @@ async function fetchOfficialSongs() {
   } catch(e) { return []; }
 }
 
-async function renderOfficialModal() {
+let officialAllSongs = [];
+
+function renderOfficialList(songs) {
   const body = document.getElementById('officialBody');
   if (!body) return;
-  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
-  const songs = await fetchOfficialSongs();
   body.innerHTML = '';
-  if (!songs.length) { body.innerHTML = '<div class="lib-empty">公式曲がありません</div>'; return; }
+  if (!songs.length) { body.innerHTML = '<div class="lib-empty">該当する曲がありません</div>'; return; }
   songs.forEach(song => {
     const item = document.createElement('div');
     item.className = 'lib-item';
     item.style.cursor = 'pointer';
     const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
-    item.innerHTML = '<div style="flex:1;min-width:0;"><div class="lib-item-name">'+instIcon+' '+esc(song.title||'無題')+'</div><div class="lib-item-date">'+(song.lyricist?'作詞: '+esc(song.lyricist):'')+'</div></div><span style="font-size:0.6rem;background:var(--accent-dim);color:var(--accent-light);border:1px solid var(--accent);border-radius:3px;padding:1px 4px;flex-shrink:0;">公式</span>';
+    const artistStr = song.artist ? '🎤 '+esc(song.artist) : (song.lyricist ? '作詞: '+esc(song.lyricist) : '');
+    item.innerHTML = '<div style="flex:1;min-width:0;"><div class="lib-item-name">'+instIcon+' '+esc(song.title||'無題')+'</div><div class="lib-item-date">'+artistStr+'</div></div><span style="font-size:0.6rem;background:var(--accent-dim);color:var(--accent-light);border:1px solid var(--accent);border-radius:3px;padding:1px 4px;flex-shrink:0;">公式</span>';
     item.addEventListener('click', () => {
       document.getElementById('titleInput').value = song.title||'';
       document.getElementById('lyricsInput').value = song.lyrics||'';
       const lEl=document.getElementById('lyricistInput');if(lEl)lEl.value=song.lyricist||'';
       const cEl=document.getElementById('composerInput');if(cEl)cEl.value=song.composer||'';
       const yEl=document.getElementById('youtubeInput');if(yEl)yEl.value=song.youtube||'';
+      const aEl=document.getElementById('artistInput');if(aEl)aEl.value=song.artist||'';
       if(song.instrument && typeof setInstrument==='function')setInstrument(song.instrument);
       if(typeof transpose!=='undefined'){transpose=song.transpose||0;document.getElementById('transpVal').textContent=transpose===0?'±0':(transpose>0?'+':'')+transpose;}
       currentSongId=null; render(); renderLibrary();
@@ -2788,6 +2803,94 @@ async function renderOfficialModal() {
       if(window.innerWidth<=900&&typeof switchMobTab==='function')switchMobTab('preview');
     });
     body.appendChild(item);
+  });
+}
+
+async function renderOfficialModal() {
+  const body = document.getElementById('officialBody');
+  if (!body) return;
+  body.innerHTML = '<div class="lib-empty">読み込み中...</div>';
+  officialAllSongs = await fetchOfficialSongs();
+  renderOfficialList(officialAllSongs);
+  // 検索イベント
+  const searchInput = document.getElementById('officialSearchInput');
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.oninput = function() {
+      const q = this.value.trim().toLowerCase();
+      if (!q) { renderOfficialList(officialAllSongs); return; }
+      const filtered = officialAllSongs.filter(s =>
+        (s.title||'').toLowerCase().includes(q) ||
+        (s.artist||'').toLowerCase().includes(q) ||
+        (s.lyricist||'').toLowerCase().includes(q)
+      );
+      renderOfficialList(filtered);
+    };
+  }
+}
+
+// スマホ用選択書出モーダル
+function showMobSelectModal() {
+  const songs = loadSongs();
+  if (!songs.length) { alert('保存された曲がありません。'); return; }
+
+  // 既存モーダルがあれば削除
+  const existing = document.getElementById('mobSelectModal');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'mobSelectModal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;display:flex;align-items:flex-end;justify-content:center;';
+
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--panel);border-radius:16px 16px 0 0;width:100%;max-width:600px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;';
+
+  // ヘッダー
+  const header = document.createElement('div');
+  header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0;';
+  header.innerHTML = '<span style="font-size:0.88rem;font-weight:700;color:var(--accent-light);">☑ 書き出す曲を選択</span>'
+    + '<div style="display:flex;gap:8px;">'
+    + '<button id="mobSelExportBtn" style="background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent-light);border-radius:6px;padding:4px 12px;font-size:0.78rem;cursor:pointer;">🔼 書出</button>'
+    + '<button id="mobSelCloseBtn" style="background:none;border:none;color:var(--text-dim);font-size:1rem;cursor:pointer;padding:4px;">✕</button>'
+    + '</div>';
+
+  // 曲リスト
+  const list = document.createElement('div');
+  list.style.cssText = 'overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;';
+
+  songs.forEach(song => {
+    const item = document.createElement('label');
+    item.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;';
+    const inst = song.instrument || 'ukulele';
+    const icon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[inst]||'🎵';
+    item.innerHTML = '<input type="checkbox" data-id="'+song.id+'" style="width:18px;height:18px;flex-shrink:0;">'
+      + '<div style="flex:1;min-width:0;"><div style="font-size:0.88rem;color:var(--text);font-weight:700;">'+icon+' '+esc(song.title||'無題')+'</div>'
+      + '<div style="font-size:0.72rem;color:var(--text-dim);">'+(song.lyricist?'作詞: '+esc(song.lyricist):'')+'</div></div>';
+    list.appendChild(item);
+  });
+
+  modal.appendChild(header);
+  modal.appendChild(list);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // 閉じる
+  document.getElementById('mobSelCloseBtn').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.remove(); });
+
+  // 書出
+  document.getElementById('mobSelExportBtn').addEventListener('click', () => {
+    const checked = list.querySelectorAll('input[type="checkbox"]:checked');
+    if (!checked.length) { alert('曲を選択してください。'); return; }
+    const ids = new Set([...checked].map(el => el.dataset.id));
+    const selected = songs.filter(s => ids.has(s.id));
+    const data = { app:'コード譜職人', version:1, exportedAt:new Date().toISOString(), songs:selected };
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download='コード譜職人_選択_'+new Date().toISOString().slice(0,10)+'.json';
+    a.click(); URL.revokeObjectURL(url);
+    overlay.remove();
   });
 }
 
@@ -2863,6 +2966,14 @@ window.addEventListener('load', function() {
 
   var expSelBtn = document.getElementById('libExportSelBtn');
   if(expSelBtn) expSelBtn.addEventListener('click', doExportSelected);
+
+  // スマホ用選択書出ボタン
+  var mobExpSelBtn = document.getElementById('mobExportSelBtn2');
+  if(mobExpSelBtn) mobExpSelBtn.addEventListener('click', function() {
+    // スマホでは全曲リストからチェックボックス選択できないので
+    // モーダルで選択できるようにする
+    showMobSelectModal();
+  });
 
   var offBtn = document.getElementById('libOfficialBtn');
   if(offBtn) offBtn.addEventListener('click', function(){
