@@ -2433,9 +2433,10 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
         <li>onコード（分数コード）対応</li>
         <li>コードの自動移調</li>
         <li>曲の保存・管理（複数曲対応）</li>
-        <li>YouTubeリンクの保存・表示</li>
-        <li>曲データのJSON書き出し・取り込み</li>
-        <li>公式曲リストの表示</li>
+        <li>アーティスト名・YouTubeリンクの保存・表示</li>
+        <li>YouTubeサムネイル画像の表示</li>
+        <li>曲データのJSON書き出し・選択書き出し・取り込み</li>
+        <li>公式曲リストの表示（アーティスト別・検索対応）</li>
         <li>A4サイズで印刷・PDF保存</li>
         <li>5種類のカラーテーマ</li>
       </ul>
@@ -2466,8 +2467,13 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
     </div>
 
     <div class="help-section">
-      <h3>🎬 YouTubeリンク</h3>
-      <p>編集画面の <code>🎬 YouTube</code> 欄にURLを貼り付けると、プレビューにリンクが表示されます。タップするとYouTubeが開きます。リンクは曲と一緒に保存されます。</p>
+      <h3>🎬 YouTubeリンク・サムネイル</h3>
+      <p>編集画面の <code>🎬 YouTube</code> 欄にURLを貼り付けると、プレビューにサムネイル画像とリンクが表示されます。タップするとYouTubeが開きます。リンクは曲と一緒に保存されます。</p>
+    </div>
+
+    <div class="help-section">
+      <h3>🎤 アーティスト名</h3>
+      <p>編集画面の <code>🎤 アーティスト</code> 欄にアーティスト名を入力すると、プレビューと曲リストに表示されます。公式曲リストではアーティスト別に曲が整理されます。</p>
     </div>
 
     <div class="help-section">
@@ -2476,13 +2482,13 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
     </div>
 
     <div class="help-section">
-      <h3>🔼 書き出し・🔽 読み込み</h3>
-      <p><code>🔼 書出</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>🔽 読込</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。他の人と曲データを共有する時に便利です。</p>
+      <h3>🔼 書き出し・☑ 選択書き出し・🔽 読み込み</h3>
+      <p><code>🔼 全書出</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>☑ 選択書出</code> ボタンで書き出したい曲だけを選んで書き出せます。<code>🔽 読込</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。バックアップや曲の共有に便利です。</p>
     </div>
 
     <div class="help-section">
       <h3>🎵 公式曲リスト</h3>
-      <p><code>🎵 公式曲</code> ボタンで管理者が公開した曲リストを表示します。曲をタップするとそのまま編集・プレビューができます。</p>
+      <p><code>🎵 公式曲</code> ボタンで管理者が公開した曲リストを表示します。曲は<strong>アーティスト別</strong>にまとめられており、アーティスト名をタップすると曲一覧が展開されます。上部の検索欄で<strong>曲名・アーティスト名</strong>での絞り込みもできます。曲をタップするとそのまま編集・プレビューができます。</p>
     </div>
 
     <div class="help-section">
