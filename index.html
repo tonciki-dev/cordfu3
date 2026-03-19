@@ -714,6 +714,7 @@ textarea::placeholder { color: var(--text-dim); }
   .mob-song-select-wrap { display:flex; align-items:center; gap:6px; padding:5px 10px; border-bottom:1px solid var(--border); background:var(--panel2); flex-shrink:0; }
   .mob-tool-bar { display:flex !important; align-items:center; gap:4px; padding:5px 8px; border-bottom:1px solid var(--border); background:var(--panel2); flex-shrink:0; flex-wrap:wrap; }
   .panel-bar { display:none !important; }
+  .editor-panel .panel-bar { display:none !important; }
   .view-panel .panel-bar { display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:5px !important; padding:5px 8px !important; flex-shrink:0 !important; }
   .editor-panel .title-row { flex-shrink:0; flex-wrap:wrap; gap:4px !important; padding:4px 10px; }
   .title-input { font-size:0.95rem !important; }
@@ -2777,32 +2778,75 @@ async function fetchOfficialSongs() {
 
 let officialAllSongs = [];
 
+function loadOfficialSong(song) {
+  document.getElementById('titleInput').value = song.title||'';
+  document.getElementById('lyricsInput').value = song.lyrics||'';
+  const lEl=document.getElementById('lyricistInput');if(lEl)lEl.value=song.lyricist||'';
+  const cEl=document.getElementById('composerInput');if(cEl)cEl.value=song.composer||'';
+  const yEl=document.getElementById('youtubeInput');if(yEl)yEl.value=song.youtube||'';
+  const aEl=document.getElementById('artistInput');if(aEl)aEl.value=song.artist||'';
+  if(song.instrument && typeof setInstrument==='function')setInstrument(song.instrument);
+  if(typeof transpose!=='undefined'){transpose=song.transpose||0;document.getElementById('transpVal').textContent=transpose===0?'±0':(transpose>0?'+':'')+transpose;}
+  currentSongId=null; render(); renderLibrary();
+  document.getElementById('officialOverlay').style.display='none';
+  if(window.innerWidth<=900&&typeof switchMobTab==='function')switchMobTab('preview');
+}
+
 function renderOfficialList(songs) {
   const body = document.getElementById('officialBody');
   if (!body) return;
   body.innerHTML = '';
   if (!songs.length) { body.innerHTML = '<div class="lib-empty">該当する曲がありません</div>'; return; }
+
+  // アーティスト別にグループ化
+  const groups = {};
+  const order = [];
   songs.forEach(song => {
-    const item = document.createElement('div');
-    item.className = 'lib-item';
-    item.style.cursor = 'pointer';
-    const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
-    const artistStr = song.artist ? '🎤 '+esc(song.artist) : (song.lyricist ? '作詞: '+esc(song.lyricist) : '');
-    item.innerHTML = '<div style="flex:1;min-width:0;"><div class="lib-item-name">'+instIcon+' '+esc(song.title||'無題')+'</div><div class="lib-item-date">'+artistStr+'</div></div><span style="font-size:0.6rem;background:var(--accent-dim);color:var(--accent-light);border:1px solid var(--accent);border-radius:3px;padding:1px 4px;flex-shrink:0;">公式</span>';
-    item.addEventListener('click', () => {
-      document.getElementById('titleInput').value = song.title||'';
-      document.getElementById('lyricsInput').value = song.lyrics||'';
-      const lEl=document.getElementById('lyricistInput');if(lEl)lEl.value=song.lyricist||'';
-      const cEl=document.getElementById('composerInput');if(cEl)cEl.value=song.composer||'';
-      const yEl=document.getElementById('youtubeInput');if(yEl)yEl.value=song.youtube||'';
-      const aEl=document.getElementById('artistInput');if(aEl)aEl.value=song.artist||'';
-      if(song.instrument && typeof setInstrument==='function')setInstrument(song.instrument);
-      if(typeof transpose!=='undefined'){transpose=song.transpose||0;document.getElementById('transpVal').textContent=transpose===0?'±0':(transpose>0?'+':'')+transpose;}
-      currentSongId=null; render(); renderLibrary();
-      document.getElementById('officialOverlay').style.display='none';
-      if(window.innerWidth<=900&&typeof switchMobTab==='function')switchMobTab('preview');
+    const artist = song.artist || song.lyricist || '（アーティスト不明）';
+    if (!groups[artist]) { groups[artist] = []; order.push(artist); }
+    groups[artist].push(song);
+  });
+
+  // アーティストごとに表示
+  order.forEach(artist => {
+    const artistSongs = groups[artist];
+
+    // アーティスト行
+    const artistRow = document.createElement('div');
+    artistRow.style.cssText = 'display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;background:var(--panel2);user-select:none;';
+    artistRow.innerHTML = '<span style="font-size:0.88rem;font-weight:700;color:var(--accent-light);flex:1;">🎤 '+esc(artist)+'</span>'
+      + '<span style="font-size:0.72rem;color:var(--text-dim);margin-right:6px;">'+artistSongs.length+'曲</span>'
+      + '<span class="artist-arrow" style="font-size:0.8rem;color:var(--text-dim);transition:transform 0.2s;">▶</span>';
+
+    // 曲リストコンテナ（最初は非表示）
+    const songList = document.createElement('div');
+    songList.style.display = 'none';
+
+    artistSongs.forEach(song => {
+      const item = document.createElement('div');
+      item.style.cssText = 'display:flex;align-items:center;padding:10px 14px 10px 24px;border-bottom:1px solid var(--border);cursor:pointer;';
+      const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
+      item.innerHTML = '<div style="flex:1;min-width:0;">'
+        + '<div style="font-size:0.88rem;color:var(--text);font-weight:600;">'+instIcon+' '+esc(song.title||'無題')+'</div>'
+        + '<div style="font-size:0.72rem;color:var(--text-dim);">'+(song.lyricist?'作詞: '+esc(song.lyricist):'')+'</div>'
+        + '</div>';
+      item.addEventListener('click', () => loadOfficialSong(song));
+      item.addEventListener('mouseover', () => item.style.background='var(--panel2)');
+      item.addEventListener('mouseout', () => item.style.background='');
+      songList.appendChild(item);
     });
-    body.appendChild(item);
+
+    // アーティスト行クリックで展開/折り畳み
+    let open = false;
+    artistRow.addEventListener('click', () => {
+      open = !open;
+      songList.style.display = open ? '' : 'none';
+      const arrow = artistRow.querySelector('.artist-arrow');
+      arrow.style.transform = open ? 'rotate(90deg)' : '';
+    });
+
+    body.appendChild(artistRow);
+    body.appendChild(songList);
   });
 }
 
