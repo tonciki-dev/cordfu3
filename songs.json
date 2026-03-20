@@ -213,3 +213,24 @@
     }
   ]
 }
+
+{
+  "app": "コード譜職人",
+  "version": 1,
+  "exportedAt": "2026-03-20T10:04:51.464Z",
+  "songs": [
+    {
+      "id": "mmyqb0tw9f6g",
+      "title": "マッドロック",
+      "lyrics": "[G]女も金もいらねーぜ\n[G]タバコも酒もいらねーぜ\n[G]マッドロック鳴り響いて\n[G]骨の果てるまで",
+      "lyricist": "ザキさん",
+      "composer": "リュウさん",
+      "youtube": "https://youtu.be/-ybcVEIW7cQ?si=co-dUwqKXekn_uAy",
+      "artist": "爆弾小僧",
+      "instrument": "guitar",
+      "transpose": 0,
+      "createdAt": 1774000855799,
+      "updatedAt": 1774000923817
+    }
+  ]
+}
