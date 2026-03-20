@@ -1,8 +1,34 @@
 {
   "app": "コード譜職人",
   "version": 1,
-  "exportedAt": "2026-03-20T10:12:36.173Z",
+  "exportedAt": "2026-03-20T10:32:07.927Z",
   "songs": [
+    {
+      "id": "mmyrdz9oalfz",
+      "title": "愛こそ証",
+      "lyrics": "愛してつよう抱きしめて\nそれしか望んでないから\nかけてきてかけてきて\n愛こそ証なんだから",
+      "lyricist": "ザキさん",
+      "composer": "リュウさん",
+      "youtube": "https://youtu.be/lA7b035IJuY?si=LnQMGNEOyropAonz",
+      "artist": "爆弾小僧",
+      "instrument": "guitar",
+      "transpose": 0,
+      "createdAt": 1774002673356,
+      "updatedAt": 1774002705403
+    },
+    {
+      "id": "mmyrbcr8ywuw",
+      "title": "ダンス・ダンス・ダンス",
+      "lyrics": "[D]ダンス・ダンス・ダンス",
+      "lyricist": "ザキさん",
+      "composer": "リュウさん",
+      "youtube": "https://youtu.be/r3uo6KKans8?si=yh7l4eSvR2uqwnoW",
+      "artist": "爆弾小僧",
+      "instrument": "guitar",
+      "transpose": 0,
+      "createdAt": 1774002550868,
+      "updatedAt": 1774002714190
+    },
     {
       "id": "mmyqhhozfiwl",
       "title": "マッドロック",
