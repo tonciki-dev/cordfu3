@@ -834,6 +834,7 @@ textarea::placeholder { color: var(--text-dim); }
         <button class="lib-export-btn" id="libImportBtn" title="JSONを取り込む">🔽 読込</button>
         <input type="file" id="libImportFile" accept=".json" style="display:none;">
         <button class="lib-export-btn" id="libOfficialBtn" title="公式曲リスト">🎵 公式曲</button>
+        <button class="lib-export-btn" id="libArtistBtn" title="アーティスト管理">🎤 アーティスト</button>
         <button class="lib-export-btn" id="libSelectModeBtn" title="選択モード">☑ 選択</button>
         <button class="lib-new-btn" id="libNewBtn">＋ 新規</button>
       </div>
@@ -861,6 +862,7 @@ textarea::placeholder { color: var(--text-dim); }
       <button class="lib-export-btn" id="mobExportSelBtn2">☑ 選択書出</button>
       <button class="lib-export-btn" id="mobImportBtn">🔽 読込</button>
       <button class="lib-export-btn" id="mobOfficialBtn">🎵 公式</button>
+      <button class="lib-export-btn" id="mobArtistBtn">🎤 アーティスト</button>
       <button class="help-btn help-btn-red" id="mobHelpBtn">説明</button>
     </div>
     <div class="panel-bar">
@@ -2509,14 +2511,14 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 
     <div class="help-section">
       <h3>✨ このアプリでできること</h3>
-      <p>コード譜職人は、コード付き歌詞を簡単に作成・管理・印刷できるアプリです。</p>
       <ul style="margin-top:8px;padding-left:16px;font-size:0.78rem;color:var(--text-dim);line-height:2;">
         <li>コード付き歌詞の作成・編集</li>
         <li>ウクレレ・ギター・ベース・キーボードのコード図表示</li>
         <li>onコード（分数コード）対応</li>
-        <li>コードの自動移調・カポ対応</li>
+        <li>コードの自動移調・カポ対応・C調変換</li>
         <li>曲の保存・管理（複数曲対応）</li>
-        <li>アーティスト名・YouTubeリンクの保存・表示</li>
+        <li>アーティスト名・作詞者・作曲者・YouTubeリンクの保存</li>
+        <li>アーティストプロフィール・SNSリンクの管理</li>
         <li>YouTubeサムネイル画像の表示</li>
         <li>曲データのJSON書き出し・選択書き出し・取り込み</li>
         <li>公式曲リストの表示（アーティスト別・検索対応）</li>
@@ -2536,22 +2538,15 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
 
     <div class="help-section">
       <h3>🎵 onコード（分数コード）の書き方</h3>
-      <p>ベース音を指定するonコードは <code>/</code> で書きます。</p>
+      <p>ベース音を指定するonコードは <code>/</code> で書きます。移調時もベース音が自動で変わります。</p>
       <div class="example">
-        [C/E]君の[Am/G]声が[F/A]聞こえる<br>
-        [G/B]風に[C]乗って
+        [C/E]君の[Am/G]声が[F/A]聞こえる
       </div>
-      <p style="margin-top:6px;">移調時もベース音が自動で変わります。</p>
     </div>
 
     <div class="help-section">
       <h3>🎹 コードの入力補助</h3>
-      <p>編集画面の <code>コード</code> ボタンでコード選択ポップアップが開きます。ルート音・コード種類を選んで <code>📋 コピー</code> でクリップボードにコピー、または <code>挿入</code> ボタンでカーソル位置に直接挿入できます。</p>
-    </div>
-
-    <div class="help-section">
-      <h3>🎬 YouTubeリンク・サムネイル</h3>
-      <p>編集画面の <code>🎬 YouTube</code> 欄にURLを貼り付けると、プレビューにサムネイル画像とリンクが表示されます。タップするとYouTubeが開きます。リンクは曲と一緒に保存されます。</p>
+      <p><code>コード</code> ボタンでコード選択ポップアップが開きます。ルート音・コード種類を選んで <code>📋 コピー</code> でコピー、または <code>挿入</code> ボタンでカーソル位置に直接挿入できます。onコードは「onコードを使う」チェックボックスをオンにしてベース音を選択します。</p>
     </div>
 
     <div class="help-section">
@@ -2560,23 +2555,41 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
     </div>
 
     <div class="help-section">
+      <h3>🎤 アーティスト管理</h3>
+      <p>ツールバーの <code>🎤 アーティスト</code> ボタンでアーティスト情報を登録・編集できます。登録できる情報は以下の通りです。</p>
+      <ul style="margin-top:6px;padding-left:16px;font-size:0.78rem;color:var(--text-dim);line-height:2;">
+        <li>アーティスト名</li>
+        <li>📝 プロフィールコメント</li>
+        <li>𝕏 X（Twitter）URL</li>
+        <li>📷 Instagram URL</li>
+        <li>▶ YouTubeチャンネルURL</li>
+      </ul>
+      <p style="margin-top:6px;">登録したアーティスト情報は <code>🔼 全書出</code> でsongs.jsonに含めて書き出せます。<code>🔽 読込</code> で取り込んだ時も復元されます。</p>
+    </div>
+
+    <div class="help-section">
+      <h3>🎬 YouTubeリンク・サムネイル</h3>
+      <p>編集画面の <code>🎬 YouTube</code> 欄にURLを貼り付けると、プレビューにサムネイル画像とリンクが表示されます。タップするとYouTubeが開きます。</p>
+    </div>
+
+    <div class="help-section">
       <h3>📚 曲の保存・管理</h3>
-      <p>タイトル・作詞者・作曲者を入力して <code>💾 保存</code> で保存します。スマホではプルダウンから曲を選択・読み込みできます。<code>🗑</code> ボタンで削除、<code>＋ 新規</code> で新しい曲を作れます。</p>
+      <p>タイトル・作詞者・作曲者・アーティスト名を入力して <code>💾 保存</code> で保存します。スマホではプルダウンから曲を選択・読み込みできます。<code>🗑</code> ボタンで削除、<code>＋ 新規</code> で新しい曲を作れます。</p>
     </div>
 
     <div class="help-section">
       <h3>🔼 書き出し・☑ 選択書き出し・🔽 読み込み</h3>
-      <p><code>🔼 全書出</code> ボタンで全曲データをJSONファイルとして書き出せます。<code>☑ 選択書出</code> ボタンで書き出したい曲だけを選んで書き出せます。<code>🔽 読込</code> ボタンでJSONファイルを取り込み、既存の曲に追加できます。バックアップや曲の共有に便利です。</p>
+      <p><code>🔼 全書出</code> で全曲をJSONファイルに書き出せます。<code>☑ 選択書出</code> で書き出したい曲だけを選んで書き出せます。<code>🔽 読込</code> でJSONファイルを取り込み、既存の曲に追加できます。バックアップや公式リストの更新に便利です。</p>
     </div>
 
     <div class="help-section">
       <h3>🎵 公式曲リスト</h3>
-      <p><code>🎵 公式曲</code> ボタンで管理者が公開した曲リストを表示します。曲は<strong>アーティスト別</strong>にまとめられており、アーティスト名をタップすると曲一覧が展開されます。上部の検索欄で<strong>曲名・アーティスト名</strong>での絞り込みもできます。曲をタップするとそのまま編集・プレビューができます。</p>
+      <p><code>🎵 公式曲</code> ボタンで管理者が公開した曲リストを表示します。曲は<strong>アーティスト別</strong>にまとめられており、アーティスト名をタップすると曲一覧が展開されます。上部の検索欄で<strong>曲名・アーティスト名</strong>で絞り込みもできます。<code>🔄</code> で最新データに更新できます。</p>
     </div>
 
     <div class="help-section">
       <h3>🎸 楽器の切り替え</h3>
-      <p>上部の楽器ボタンで <strong>ウクレレ・ギター・ベース・キーボード</strong> を切り替えると、コード図が変わります。ウクレレ・ギター・ベースはフレット図、キーボードは鍵盤図が表示されます。</p>
+      <p>上部の楽器ボタンで <strong>ウクレレ・ギター・ベース・キーボード</strong> を切り替えると、コード図が変わります。</p>
     </div>
 
     <div class="help-section">
@@ -2588,19 +2601,13 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
       <h3>🎸 カポ</h3>
       <p>プレビュー上部の <code>カポ</code> プルダウンでカポの位置（1〜7フレット）を選択できます。カポを設定するとダイアグラムがカポ後の押さえ方で表示されます。</p>
       <div class="example">
-        例：[A]の曲でカポ1 → A#の押さえ方で表示<br>
-        例：[D]の曲でカポ2 → E の押さえ方で表示
+        例：[A]の曲でカポ1 → A#の押さえ方で表示
       </div>
     </div>
 
     <div class="help-section">
       <h3>🎵 C調変換</h3>
-      <p><code>C調</code> ボタンを押すと、曲内に含まれるコードが一覧でポップアップ表示されます。基準にしたいコード（歌メロの主音など）を選ぶと、自動的にカポ＋移調を計算してC調に変換します。</p>
-      <div class="example">
-        例：Aを選択 → カポ3でFの押さえ方に変換<br>
-        例：Dを選択 → カポ2でCの押さえ方に変換
-      </div>
-      <p style="margin-top:6px;">イントロと歌メロでキーが違う場合は、歌メロの主音を選んでください。</p>
+      <p><code>C調</code> ボタンを押すと、曲内のコードが一覧でポップアップ表示されます。基準にしたいコード（歌メロの主音など）を選ぶと、自動的にカポ＋移調を計算してC調に変換します。イントロと歌メロでキーが違う場合は、歌メロの主音を選んでください。</p>
     </div>
 
     <div class="help-section">
@@ -2612,7 +2619,8 @@ document.getElementById('pdfBtn').addEventListener('click', async () => {
       <h3>🎨 テーマ切り替え</h3>
       <p>画面右上のプルダウンで <strong>ダーク・ライト・モノクロ・ロゼ・オーシャン</strong> の5種類から選べます。選んだテーマは次回も引き継がれます。</p>
     </div>
-  </div>
+
+    </div>
 </div>
 
 <script>
@@ -2836,6 +2844,20 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<!-- アーティスト管理モーダル -->
+<div id="artistMgrOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;align-items:flex-start;justify-content:center;overflow-y:auto;padding:20px 0;">
+  <div style="background:var(--panel);border-radius:12px;width:min(500px,calc(100vw - 24px));margin:auto;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);">
+      <span style="font-size:0.88rem;font-weight:700;color:var(--accent-light);">🎤 アーティスト管理</span>
+      <div style="display:flex;gap:6px;">
+        <button id="artistAddBtn" style="background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent-light);border-radius:4px;padding:3px 10px;font-size:0.72rem;cursor:pointer;">＋ 追加</button>
+        <button id="artistMgrClose" style="background:none;border:none;color:var(--text-dim);font-size:1rem;cursor:pointer;padding:4px;">✕</button>
+      </div>
+    </div>
+    <div id="artistMgrBody" style="padding:12px;max-height:70vh;overflow-y:auto;"></div>
+  </div>
+</div>
+
 <!-- 公式曲モーダル -->
 <div id="officialOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;align-items:flex-end;justify-content:center;">
   <div style="background:var(--panel);border-radius:16px 16px 0 0;width:100%;max-width:600px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;">
@@ -2847,7 +2869,7 @@ if ('serviceWorker' in navigator) {
       </div>
     </div>
     <div style="padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;">
-      <input id="officialSearchInput" type="text" placeholder="🔍 曲名・アーティスト名で検索..." style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:0.82rem;font-family:'Noto Sans JP',sans-serif;color:var(--text);outline:none;">
+      <input id="officialSearchInput" type="text" placeholder="🔍 曲名・アーティスト名で検索..." style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:0.82rem;font-family:sans-serif;color:var(--text);outline:none;">
     </div>
     <div id="officialBody" style="overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;">
       <div class="lib-empty">読み込み中...</div>
@@ -2856,11 +2878,146 @@ if ('serviceWorker' in navigator) {
 </div>
 
 <script>
+// ── アーティスト管理 ──
+const ARTISTS_KEY = 'artistProfiles';
+
+function loadArtists() {
+  try { return JSON.parse(localStorage.getItem(ARTISTS_KEY)) || []; } catch(e) { return []; }
+}
+function saveArtists(artists) {
+  localStorage.setItem(ARTISTS_KEY, JSON.stringify(artists));
+}
+
+function renderArtistMgr() {
+  const body = document.getElementById('artistMgrBody');
+  if (!body) return;
+  const artists = loadArtists();
+  body.innerHTML = '';
+
+  if (!artists.length) {
+    body.innerHTML = '<div class="lib-empty">アーティストがいません。＋追加ボタンで登録してください。</div>';
+    return;
+  }
+
+  artists.forEach((artist, idx) => {
+    const card = document.createElement('div');
+    card.style.cssText = 'border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:10px;';
+    card.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+      + '<span style="font-weight:700;color:var(--accent-light);font-size:0.88rem;">🎤 '+esc(artist.name||'')+'</span>'
+      + '<button data-idx="'+idx+'" class="artist-del-btn" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:0.8rem;">🗑</button>'
+      + '</div>'
+      + '<div style="font-size:0.75rem;color:var(--text-dim);line-height:1.8;">'
+      + (artist.profile ? '<div>📝 '+esc(artist.profile)+'</div>' : '')
+      + (artist.x ? '<div>𝕏 <a href="'+esc(artist.x)+'" target="_blank" style="color:var(--accent-light);">'+esc(artist.x)+'</a></div>' : '')
+      + (artist.instagram ? '<div>📷 <a href="'+esc(artist.instagram)+'" target="_blank" style="color:var(--accent-light);">'+esc(artist.instagram)+'</a></div>' : '')
+      + (artist.youtube ? '<div>▶ <a href="'+esc(artist.youtube)+'" target="_blank" style="color:var(--accent-light);">'+esc(artist.youtube)+'</a></div>' : '')
+      + '</div>'
+      + '<button data-idx="'+idx+'" class="artist-edit-btn" style="margin-top:8px;background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:4px;padding:2px 10px;font-size:0.72rem;cursor:pointer;">✏️ 編集</button>';
+    body.appendChild(card);
+  });
+
+  body.querySelectorAll('.artist-del-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const i = parseInt(btn.dataset.idx);
+      const artists = loadArtists();
+      if (confirm('「'+artists[i].name+'」を削除しますか？')) {
+        artists.splice(i, 1);
+        saveArtists(artists);
+        renderArtistMgr();
+      }
+    });
+  });
+  body.querySelectorAll('.artist-edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const i = parseInt(btn.dataset.idx);
+      showArtistForm(i);
+    });
+  });
+}
+
+function showArtistForm(editIdx) {
+  const artists = loadArtists();
+  const artist = editIdx !== undefined ? artists[editIdx] : { name:'', profile:'', x:'', instagram:'', youtube:'' };
+
+  const existing = document.getElementById('artistFormOverlay');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'artistFormOverlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:400;display:flex;align-items:center;justify-content:center;padding:16px;';
+
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--panel);border-radius:12px;padding:20px;width:min(460px,100%);max-height:85vh;overflow-y:auto;';
+  modal.innerHTML = '<div style="font-size:0.88rem;font-weight:700;color:var(--accent-light);margin-bottom:14px;">'
+    + (editIdx !== undefined ? '✏️ アーティスト編集' : '＋ アーティスト追加') + '</div>'
+    + ['name:🎤 アーティスト名', 'profile:📝 プロフィール', 'x:𝕏 X（Twitter）URL', 'instagram:📷 Instagram URL', 'youtube:▶ YouTubeチャンネルURL']
+      .map(f => {
+        const [key, label] = f.split(':');
+        const isTextarea = key === 'profile';
+        return '<div style="margin-bottom:10px;">'
+          + '<div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px;">'+label+'</div>'
+          + (isTextarea
+            ? '<textarea id="af_'+key+'" style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:0.82rem;font-family:sans-serif;color:var(--text);resize:vertical;height:80px;outline:none;">'+esc(artist[key]||'')+'</textarea>'
+            : '<input id="af_'+key+'" type="text" value="'+esc(artist[key]||'')+'" style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:0.82rem;font-family:sans-serif;color:var(--text);outline:none;">'
+          )
+          + '</div>';
+      }).join('')
+    + '<div style="display:flex;gap:8px;margin-top:14px;">'
+    + '<button id="afSaveBtn" style="flex:1;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent-light);border-radius:6px;padding:8px;font-size:0.82rem;cursor:pointer;font-weight:700;">💾 保存</button>'
+    + '<button id="afCancelBtn" style="flex:1;background:none;border:1px solid var(--border);color:var(--text-dim);border-radius:6px;padding:8px;font-size:0.82rem;cursor:pointer;">キャンセル</button>'
+    + '</div>';
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  document.getElementById('afCancelBtn').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.remove(); });
+
+  document.getElementById('afSaveBtn').addEventListener('click', () => {
+    const name = document.getElementById('af_name').value.trim();
+    if (!name) { alert('アーティスト名を入力してください。'); return; }
+    const data = {
+      name,
+      profile: document.getElementById('af_profile').value.trim(),
+      x: document.getElementById('af_x').value.trim(),
+      instagram: document.getElementById('af_instagram').value.trim(),
+      youtube: document.getElementById('af_youtube').value.trim(),
+    };
+    const artists = loadArtists();
+    if (editIdx !== undefined) { artists[editIdx] = data; }
+    else { artists.push(data); }
+    saveArtists(artists);
+    overlay.remove();
+    renderArtistMgr();
+  });
+}
+
+// アーティスト管理ボタンイベント
+window.addEventListener('load', function() {
+  ['libArtistBtn','mobArtistBtn'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', () => {
+      document.getElementById('artistMgrOverlay').style.display = 'flex';
+      renderArtistMgr();
+    });
+  });
+  document.getElementById('artistMgrClose').addEventListener('click', () => {
+    document.getElementById('artistMgrOverlay').style.display = 'none';
+  });
+  document.getElementById('artistAddBtn').addEventListener('click', () => showArtistForm());
+  document.getElementById('artistMgrOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) e.currentTarget.style.display = 'none';
+  });
+});
+</script>
+
+<script>
 // ── JSON エクスポート（グローバル） ──
 function doExport() {
   const songs = loadSongs();
   if (!songs.length) { alert('保存された曲がありません。'); return; }
-  const data = { app:'コード譜職人', version:1, exportedAt:new Date().toISOString(), songs };
+  const artists = loadArtists();
+  const data = { app:'コード譜職人', version:1, exportedAt:new Date().toISOString(), artists, songs };
   const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json;charset=utf-8'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2936,7 +3093,7 @@ function renderOfficialList(songs) {
       const instIcon = {ukulele:'🎸',guitar:'🎸',bass:'🎸',keyboard:'🎹'}[song.instrument||'ukulele']||'🎵';
       item.innerHTML = '<div style="flex:1;min-width:0;">'
         + '<div style="font-size:0.88rem;color:var(--text);font-weight:600;">'+instIcon+' '+esc(song.title||'無題')+'</div>'
-        + '<div style="font-size:0.72rem;color:var(--text-dim);">'+(song.lyricist?'作詞: '+esc(song.lyricist):'')+'</div>'
+        + '<div style="font-size:0.72rem;color:var(--text-dim);">'+[song.lyricist?'作詞: '+esc(song.lyricist):'', song.composer?'作曲: '+esc(song.composer):''].filter(Boolean).join('　')+'</div>'
         + '</div>';
       item.addEventListener('click', () => loadOfficialSong(song));
       item.addEventListener('mouseover', () => item.style.background='var(--panel2)');
@@ -3099,6 +3256,7 @@ window.addEventListener('load', function() {
       try {
         const data = JSON.parse(e.target.result);
         const imported = Array.isArray(data.songs) ? data.songs : (Array.isArray(data) ? data : null);
+        if (data.artists && Array.isArray(data.artists)) { saveArtists(data.artists); }
         if (!imported) { alert('対応していない形式のファイルです。'); return; }
         const existing = loadSongs();
         const existingIds = new Set(existing.map(function(s){return s.id;}));
