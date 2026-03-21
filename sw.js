@@ -1,5 +1,5 @@
 // コード譜職人 Service Worker
-const CACHE = 'cordfu3-v5';
+const CACHE = 'cordfu3-v10';
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -23,8 +23,8 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // index.htmlは常にネットワークから取得（キャッシュを使わない）
-  if (e.request.url.endsWith('index.html') || e.request.url.endsWith('/')) {
+  // index.htmlは常にネットワークから取得
+  if (e.request.url.includes('index.html') || e.request.url.endsWith('/')) {
     e.respondWith(
       fetch(e.request).catch(() => caches.match(e.request))
     );
